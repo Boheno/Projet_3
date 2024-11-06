@@ -2,9 +2,7 @@ const works = await fetch("http://localhost:5678/api/works")
   .then(works => 
     works.json())
 
-console.log(works)
-
-  // Fonction génération des filtres catégories
+generateWorks(works);
 
   /* Ajout d'un nouveau projet pour tester */
 //   works.push(
@@ -22,6 +20,25 @@ console.log(works)
 // )
 
 function generateCategory(works) {
+
+  /**
+   * Qu'est ce qui peut être extrait de cette fonction
+   * 
+   * Premièrement, elle créé un array contenant les catégories (Peut-être mis dans une fonction à part)
+   * Ensuite, elle parcourt ces catégories pour crééer un bouton par catégorie.   
+   */
+
+    // Ici nous ne sommes plus dans la boucle des catégories, tu peux y créer ton bouton "Tous" qui sera ajouté aux autres
+    let btnTous = document.createElement("button");
+    btnTous.type = "button";
+    btnTous.setAttribute("class", "btnStyle");
+  
+    // btnTous.onclick = () => {
+    //   let afficherFigures = 
+    // }
+    btnTous.innerText = "Tous";
+    document.querySelector("#divBoutons").appendChild(btnTous);
+
   //Création de 2 tableaux vides
   let setCategorieUnique      = new Set(); //stockage catégories
   let arrayCategoriesUniques  = []; //tableau sans doublons
@@ -43,60 +60,69 @@ function generateCategory(works) {
       arrayCategoriesUniques.push(categorie);
     }
   })
+
   //boucle parcourant le nouveau tableau avec les 3 catégories
   for (let i = 0; i < arrayCategoriesUniques.length; i++) {
     let categoryElements = document.createElement ("div");
     let categoryButton = document.createElement ("button");
-    
+
     // Habillage des boutons (classes ou direct CSS)
-    categoryButton.name = arrayCategoriesUniques[i]["name"]
+    /* Pour tes boutons, n'oublie pas d'ajouter un effet sur le bouton pour indiquer quel filtre est actif */
+    categoryButton.name = arrayCategoriesUniques[i]["name"];
+    categoryButton.setAttribute("data-id-categorie", arrayCategoriesUniques[i]["id"])
     categoryButton.type = "button";
-    categoryButton.style.background = "white";
-    categoryButton.style.padding = "5px";
-    //categoryButton.style.margin = "10px";
-    //categoryButton.style.justifyContent = "space-around";
-    categoryButton.style.borderRadius = "25px";
-    categoryButton.style.borderColor= "#1D6154";
-    categoryButton.style.color = "#1D6154";
+    categoryButton.setAttribute("class", "btnStyle");
 
     // Listener
-  
-    categoryButton.addEventListener ("click",()=>{
-      let btnFilterCategory = arrayCategoriesUniques.filter(function(arrayCategoriesUniques){
-        return btnFilterCategory;
-      })
-    })
+    // => Récupération de tous les élements HTML qui contiennent les projets (<figure>) dans une variable
+    const figures = document.querySelectorAll(".projet");
+    
+    // Si l'attribut de la figure ne correspond pas à l'attribut du bouton, alors on cache le projet
+    categoryButton.onclick = () => {
+        // On créé deux variables, l'une qui contient les élements à afficher et l'autre les élements à cacher
+        let figuresACacher = Array.from(figures).filter(figure => figure.getAttribute("data-categorie") !== categoryButton.getAttribute("data-id-categorie"))
+        let figuresAAfficher = Array.from(figures).filter(figure => figure.getAttribute("data-categorie") === categoryButton.getAttribute("data-id-categorie"))
+        figuresACacher.forEach(figure => figure.style.display = "none");
+        figuresAAfficher.forEach(figure => figure.style.display = "block");
+      }
+
     //Integration HTML
     categoryButton.innerText = arrayCategoriesUniques[i].name;
   
     categoryElements.appendChild(categoryButton);
 
-    document.querySelectorAll(".gallery").innerHTML = categoryElements;
-    document.querySelector(".gallery").appendChild(categoryElements);
+    // document.querySelectorAll(".gallery").innerHTML = categoryElements;
+    document.querySelector("#divBoutons").appendChild(categoryElements);
   }
+
+
+
 }
 generateCategory(works);
 
 
-  // Fonction génération des projets 
-
+// Fonction génération des projets 
 function generateWorks(works) {
-
-  for (let i=0; i<works.length; i++) {
+  works.forEach(work => {;
+  //for (let i=0; i<works.length; i++) {  => avec cette méthode, rajouter S à work et [i]
 
     let worksElement  = document.createElement("figure");
     let imageWorks    = document.createElement("img");
     let captionWorks  = document.createElement("figcaption");
 
-    imageWorks.src          = works[i].imageUrl;
-    captionWorks.innerText  = works[i].title;
+    imageWorks.src          = work.imageUrl;
+    captionWorks.innerText  = work.title;
+    worksElement.setAttribute("data-categorie", work.categoryId)
+    worksElement.classList.add("projet");
 
     worksElement.appendChild(imageWorks);
     worksElement.appendChild(captionWorks);
     
     document.querySelectorAll(".gallery").innerHTML = worksElement;
     document.querySelector(".gallery").appendChild(worksElement);
-  }
+  }) 
 }
-generateWorks (works);
+//}
+
+
 
