@@ -3,6 +3,7 @@ const works = await fetch("http://localhost:5678/api/works")
     works.json())
 
 generateWorks(works);
+generateCategory(works);
 
   /* Ajout d'un nouveau projet pour tester */
 //   works.push(
@@ -28,16 +29,22 @@ function generateCategory(works) {
    * Ensuite, elle parcourt ces catégories pour crééer un bouton par catégorie.   
    */
 
-    // Ici nous ne sommes plus dans la boucle des catégories, tu peux y créer ton bouton "Tous" qui sera ajouté aux autres
+// Bouton "Tous"
+    let btnTousElement = document.createElement ("div");
     let btnTous = document.createElement("button");
     btnTous.type = "button";
     btnTous.setAttribute("class", "btnStyle");
   
-    // btnTous.onclick = () => {
-    //   let afficherFigures = 
-    // }
     btnTous.innerText = "Tous";
-    document.querySelector("#divBoutons").appendChild(btnTous);
+    btnTousElement.appendChild(btnTous);
+    document.querySelector("#divBoutons").appendChild(btnTousElement);
+
+    btnTous.onclick = () => {
+      let figures = document.querySelectorAll(".projet");
+      let afficherFigures = Array.from(figures);
+      afficherFigures.forEach (figure => figure.style.display = "block");
+    }
+// Autres boutons
 
   //Création de 2 tableaux vides
   let setCategorieUnique      = new Set(); //stockage catégories
@@ -75,7 +82,7 @@ function generateCategory(works) {
 
     // Listener
     // => Récupération de tous les élements HTML qui contiennent les projets (<figure>) dans une variable
-    const figures = document.querySelectorAll(".projet");
+    let figures = document.querySelectorAll(".projet");
     
     // Si l'attribut de la figure ne correspond pas à l'attribut du bouton, alors on cache le projet
     categoryButton.onclick = () => {
@@ -94,12 +101,7 @@ function generateCategory(works) {
     // document.querySelectorAll(".gallery").innerHTML = categoryElements;
     document.querySelector("#divBoutons").appendChild(categoryElements);
   }
-
-
-
 }
-generateCategory(works);
-
 
 // Fonction génération des projets 
 function generateWorks(works) {
