@@ -61,6 +61,11 @@ header {
 section {
 	margin: 50px 0
 }
+#login-section{
+	display: flex;
+	justify-content: center;
+	/* flex-direction: column; */
+}
 
 h1{
 	display: flex;
@@ -96,6 +101,13 @@ nav li {
 }
 
 li:hover {
+	color: #B1663C;
+	cursor:pointer;
+}
+.navBtn{
+	text-decoration: none;
+}
+.navBtn:hover{
 	color: #B1663C;
 }
 #introduction {
