@@ -61,11 +61,6 @@ header {
 section {
 	margin: 50px 0
 }
-#login-section{
-	display: flex;
-	justify-content: center;
-	/* flex-direction: column; */
-}
 
 h1{
 	display: flex;
@@ -110,6 +105,56 @@ li:hover {
 .navBtn:hover{
 	color: #B1663C;
 }
+
+#login-section{
+	display: flex;
+	flex-direction: column;
+	width:100%;
+}
+
+#login-section form {
+	margin-top:30px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#login-section label {
+	margin: 2em 0 1em 0;
+}
+
+.input-form {
+	display: flex;
+	flex-direction: column;
+	margin: 0.5rem;
+}
+
+
+.title {
+	margin-top:50px;
+	text-align: center;
+}
+
+.btn-connection{
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin : 2em auto ;
+	width: 180px;
+	height: 50px;
+	text-align: center;
+	border-radius: 60px ;
+}
+.input-field{
+	height: 50px;
+	width: 300px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	text-align: center;
+}
+
 #introduction {
 	display: flex;
 	align-items: center;
@@ -169,9 +214,13 @@ li:hover {
 	color:white;
 	cursor: pointer;
 }
+.btnStyle.active{
+	background-color: #1D6154;
+	color:white;
+}
 #contact {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
 #contact > * {
 	text-align: center;
