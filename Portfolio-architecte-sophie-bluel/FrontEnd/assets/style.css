@@ -61,7 +61,7 @@ header {
 section {
 	margin: 50px 0
 }
-
+/* Header */
 h1{
 	display: flex;
 	flex-direction: column;
@@ -75,7 +75,6 @@ h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
-;
 }
 
 h2{
@@ -88,7 +87,6 @@ nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
-
 }
 nav li {
 	padding: 0 10px;
@@ -106,9 +104,11 @@ li:hover {
 	color: #B1663C;
 }
 
+/* Page login */
 #login-section{
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 	width:100%;
 }
 
@@ -121,6 +121,11 @@ li:hover {
 
 #login-section label {
 	margin: 2em 0 1em 0;
+}
+.mdp-oublie {
+	margin : auto ;
+	text-align: center;
+	text-decoration: black;
 }
 
 .input-form {
@@ -154,7 +159,7 @@ li:hover {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 	text-align: center;
 }
-
+/* Sections */
 #introduction {
 	display: flex;
 	align-items: center;
@@ -192,6 +197,7 @@ li:hover {
 .gallery img {
 	width: 100%;
 }
+/* Boutons filtre catégories */
 .boutons {
 	display: flex;
 	justify-content: center;
@@ -218,6 +224,7 @@ li:hover {
 	background-color: #1D6154;
 	color:white;
 }
+/* Formulaire de contact page projets */
 #contact {
 	width: 50%;
 	margin: auto;
