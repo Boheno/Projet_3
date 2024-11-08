@@ -1,6 +1,7 @@
 async function seConnecter(){
     let nomUtilisateur = document.getElementById("userEmail").value;
     let motDePasse = document.getElementById("password").value;
+    let errorMessage = document.getElementById("error-message");
 
     let donnees = {
         email: nomUtilisateur,
@@ -22,7 +23,7 @@ let loginRecuperation = await fetch("http://localhost:5678/api/users/login",{
         localStorage.setItem("token", token);
         window.location.href = "projets.html";
     } else {
-        alert("Email ou mot de passe incorrect");
+        errorMessage.innerText = "Email ou mot de passe incorrect, veuillez essayer à nouveau";
     } 
 })
 }
@@ -35,12 +36,25 @@ function btnConnecter (){
         event.preventDefault();
         console.log("cliqué");
         seConnecter()
-        //fonction erreur if
     };
 }
 btnConnecter()
 
 //Fonction gestion d'erreurs identification
-function verifierChamps(form){
-    
-}
+// let form = document.getElementById("form");
+
+// function gestionErreurs(form){
+// let champsInput = document.querySelectorAll(".input-form");
+// champsInput.addEventListener ("submit",(event)=> {
+//     event.preventDefault()
+//     let inputEmail = document.getElementById("userEmail");
+//     //let inputPassword = document.getElementById("password");
+//     let valeurInput = inputEmail.value;
+
+//     if (valeurInput === ""){
+//         console.log("le champ est vide")
+//     } else{
+//         console.log ("le champ est rempli")
+//     };
+// })   
+// }
