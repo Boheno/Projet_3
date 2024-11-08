@@ -3,36 +3,44 @@ async function seConnecter(){
     let motDePasse = document.getElementById("password").value;
 
     let donnees = {
-        userEmail: nomUtilisateur,
+        email: nomUtilisateur,
         password: motDePasse
     };
 
 let loginRecuperation = await fetch("http://localhost:5678/api/users/login",{ 
-    method:"post",
+    method:"POST",
     headers:{"Content-type":"application/json"},
-    body: {
-        "qqchose": JSON.stringify(donnees)
-    }
+    body: JSON.stringify(donnees)
+    
 })
-.then(response => response.json())
-.then(data => {
-    if (data.success){
-        console.log("bravo");//Renvoyer vers la page d'accueil
+.then(async response =>  {
+    if (response.ok) {
+        const data = await response.json();
+        console.log(data.token)
+        let token = data.token;
+        console.log(token)
+        localStorage.setItem("token", token);
+        window.location.href = "projets.html";
     } else {
-        console.log("nope");//indiquer Email ou mdp incorrect
-    }
- })
+        alert("Email ou mot de passe incorrect");
+    } 
+})
 }
-// + sauvegarde du token pour l'ajout ou supp de projets
 
 //Fonction de listenner du bouton se connecter, importer via html le bouton, submit avec event.preventDefault()
 function btnConnecter (){
     let btnSeConnecter = document.querySelector(".btn-connection");
 
     btnSeConnecter.onclick = () => {
-        console.log("cliqué")
-    }
-    
+        event.preventDefault();
+        console.log("cliqué");
+        seConnecter()
+        //fonction erreur if
+    };
 }
 btnConnecter()
-seConnecter()
+
+//Fonction gestion d'erreurs identification
+function verifierChamps(form){
+    
+}

@@ -97,6 +97,10 @@ li:hover {
 	color: #B1663C;
 	cursor:pointer;
 }
+li a{
+	color:black;
+}
+
 .navBtn{
 	text-decoration: none;
 }
