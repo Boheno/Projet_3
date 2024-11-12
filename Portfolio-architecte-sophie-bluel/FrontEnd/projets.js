@@ -90,7 +90,7 @@ function generateCategory(works) {
 }
 
 // Fonction génération des projets 
-function generateWorks(works) {
+export function generateWorks(works) {
   works.forEach(work => {;
   //for (let i=0; i<works.length; i++) {  => avec cette méthode, rajouter S à work et [i]
 
