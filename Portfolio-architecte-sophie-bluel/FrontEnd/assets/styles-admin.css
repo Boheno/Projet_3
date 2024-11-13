@@ -237,13 +237,47 @@ li a{
 	justify-content: center;
 }
 .boutons-modifier{
-	padding-left: 30px;
+	padding-left: 10px;
 	padding-top: 7px;
 	font-size: 16px;
 }
-.boutons-modifier > .fa-pen-to-square{
+.btnModal > .fa-pen-to-square{
 	padding-right:5px;
 }
+.btnModal{
+	display: flex;
+	justify-content: space-between;
+	width:100%;
+	font-size: 15px;
+	background-color: transparent;
+	border:none;
+	cursor: pointer;
+}
+
+/* Modale */
+.modal{
+	top: 20%;
+	left: 20%;
+	position: fixed;
+	width: 50%;
+	height: 70%;
+	background-color:#B1663C;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	z-index: "1000";
+}
+/* .modal-background {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 999;
+	display: none; 
+  } */
 
 /* Formulaire de contact page projets */
 #contact {
