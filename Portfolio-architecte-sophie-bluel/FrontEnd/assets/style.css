@@ -99,6 +99,10 @@ li:hover {
 }
 li a{
 	color:black;
+	text-decoration: none;
+}
+.activePage{
+	font-weight: bold;
 }
 
 .navBtn{

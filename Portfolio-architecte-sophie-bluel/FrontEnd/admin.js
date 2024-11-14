@@ -9,10 +9,7 @@ const works = await fetch("http://localhost:5678/api/works")
     } 
   })
   generateWorks(works);
-// Récupération des catégories
-// const categories = await fetch("http://localhost:5678/api/categories")
-//   .then(categories => 
-//     categories.json())
+
 
 function generateWorks(works) {
     works.forEach(work => {;
@@ -35,35 +32,69 @@ function generateWorks(works) {
     }) 
   }
 
-
-
 //Fonction création de la modale et son contenu
+let isModalCreated = false;
+
 async function modale (){
-    let modal = document.createElement("div");
+    if(isModalCreated){
+        document.querySelector(".modal").style.display ="block";
+        document.querySelector(".modal-backGround").style.display ="block";
+        return;
+    }
+
+    let backGroundModal = document.createElement("div");
+    backGroundModal.classList.add("modal-backGround");
+
+    let modal        = document.createElement("div");
     let modalContent = document.createElement("div");
-    let closeBtn = document.createElement("span");
+    let closeBtn     = document.createElement("button");
 
     modal.classList.add("modal");
     modalContent.classList.add("modal-content");
     closeBtn.classList.add("close");
     closeBtn.innerHTML ="&times;";
 
+    modalContent.appendChild(closeBtn);
     modal.appendChild(modalContent);
-    modal.appendChild(closeBtn);
 
+    // Contenu de la modale: autre fonction?
+        //Titre modale
+        let titreModal = document.createElement("h3");
+        titreModal.classList.add("titre-modale");
+        titreModal.innerHTML = "Galerie photo";
+        modal.appendChild(titreModal);
+    
+        //Images
+    
+        //Bouton ajout photo
+        let btnAjoutPhoto = document.createElement("button");
+        btnAjoutPhoto.classList.add("btn-connection");
+        btnAjoutPhoto.innerHTML = "Ajouter une photo";
+        modal.appendChild(btnAjoutPhoto);
+
+    document.body.appendChild(backGroundModal);
     document.body.appendChild(modal);
-    window.onclick = function (event){
-        if (event.target === modal)
-            modal.style.display = "none"
+
+    backGroundModal.style.display = "block";
+    modal.style.display           = "block";
+
+    isModalCreated = true;
+
+
+
+    //Fermeture de la modale
+    closeBtn.onclick = function (){
+            modal.style.display           = "none";
+            backGroundModal.style.display ="none";
+    }
+    backGroundModal.onclick = function (event){
+        if (event.target === backGroundModal){
+            modal.style.display           = "none";
+            backGroundModal.style.display = "none";
+        }
     }
 }
-//Gestion des contenus
-//Bouton pour ouvrir la modale
-//let btnModal = document.querySelector(".boutons-modifier");
 
+//Ouverture modale
 let openModalBtn = document.querySelector("button");
-//openModalBtn.textContent = "Modifier";
-//openModalBtn.type = "button";
 openModalBtn.onclick = () => modale();
-//document.querySelector(".boutons-modifier").innerHTML=openModalBtn;
-//document.querySelector(".projets-titre").appendChild(openModalBtn);
