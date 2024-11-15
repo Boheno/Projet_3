@@ -39,6 +39,7 @@ async function modale (){
     if(isModalCreated){
         document.querySelector(".modal").style.display ="block";
         document.querySelector(".modal-backGround").style.display ="block";
+        //document.querySelector(".ajoutPhoto").style.display = "none";
         return;
     }
 
@@ -65,18 +66,101 @@ async function modale (){
         modal.appendChild(titreModal);
     
         //Images
-    
+        let container = document.createElement("div");
+        container.classList.add("image-container");
+
+        works.forEach(work => {;
+        let imageModal = document.createElement("img");
+        imageModal.classList.add("img");
+        imageModal.src = work.imageUrl;
+        container.appendChild(imageModal);
+
+        let iconeTrash = document.createElement("i");
+        iconeTrash.classList.add("fa-solid", "fa-trash-can");
+        container.appendChild(iconeTrash);
+
+        modal.appendChild(container);
+        });
+        
+        //Barre séparation
+        let barreModale = document.createElement("hr");
+        barreModale.classList.add("barre-modale");
+        modal.appendChild(barreModale);
+
         //Bouton ajout photo
         let btnAjoutPhoto = document.createElement("button");
         btnAjoutPhoto.classList.add("btn-connection");
         btnAjoutPhoto.innerHTML = "Ajouter une photo";
         modal.appendChild(btnAjoutPhoto);
 
-    document.body.appendChild(backGroundModal);
+//Ouverture de l'autre fenêtre modale
+btnAjoutPhoto.onclick = function(){
+let modalAjout = document.createElement("div")
+modalAjout.classList.add("ajoutPhoto");
+
+//flèche précedent <i class="fa-solid fa-arrow-left"></i>
+
+let titreAjout = document.createElement("h3");
+titreAjout.classList.add("titre-modale");
+titreAjout.innerHTML = "Ajout photo";
+modal.appendChild(titreAjout);
+
+//Ajout de projet: rectangle, logo img, btn ajouter photo, <p> jpg, png: 4mo max
+
+//Formulaire Titre et Catégorie
+let ajoutTitreProjet = document.createElement("form");
+let labelProjet = document.createElement("label");
+let inputProjet = document.createElement("input");
+
+labelProjet.textContent = "Titre";
+labelProjet.setAttribute("for", "form-ajout");
+inputProjet.setAttribute("type", "text");
+inputProjet.setAttribute("id", "form-ajout");
+
+ajoutTitreProjet.appendChild(labelProjet);
+ajoutTitreProjet.appendChild(inputProjet);
+modal.appendChild(ajoutTitreProjet);
+
+let ajoutCategoryProjet = document.createElement("form");
+let labelCategory = document.createElement("label");
+let inputCategory = document.createElement("input");
+
+labelCategory.textContent = "Catégorie";
+labelCategory.setAttribute("for", "form-ajout");
+inputCategory.setAttribute("type", "text");
+inputCategory.setAttribute("id", "form-ajout");
+
+ajoutCategoryProjet.appendChild(labelCategory);
+ajoutCategoryProjet.appendChild(inputCategory);
+modal.appendChild(ajoutCategoryProjet);
+
+
+//Barre séparation
+let barreModaleAjout = document.createElement("hr");
+barreModaleAjout.classList.add("barre-modale");
+modal.appendChild(barreModaleAjout);
+
+//Bouton valider
+let btnAjoutValide = document.createElement("button");
+btnAjoutValide.classList.add("btn-connection");
+btnAjoutValide.setAttribute("id", "valider");
+btnAjoutValide.innerHTML ="Valider";
+modal.appendChild(btnAjoutValide);
+//if champ remplis > clickable + changement background (gris > vert)
+
+
+    titreModal.style.display="none";
+    container.style.display="none";
+    barreModale.style.display="none";
+    btnAjoutPhoto.style.display="none";
+}
+
+    document.querySelector("main").appendChild(backGroundModal);
     document.body.appendChild(modal);
 
     backGroundModal.style.display = "block";
     modal.style.display           = "block";
+    
 
     isModalCreated = true;
 
