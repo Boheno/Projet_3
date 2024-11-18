@@ -47,9 +47,39 @@ table {
 	border-spacing: 0;
 }
 /** end reset css**/
-body {
+/* body {
 	max-width: 1140px;
 	margin:auto;
+	font-family: 'Work Sans' ;
+	font-size: 14px;
+} */
+body > .bandeau-header{
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	background-color: black;
+	color: white;
+	font-family: 'Work Sans' ;
+	font-size: 16px;
+	width: 100%;
+	height:50px;
+	top:0;
+	left:0;
+	margin-bottom:40px;
+	
+}
+.fa-pen-to-square{
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	color:white;
+	margin:10px;
+	
+}
+body >*:not(.bandeau-header) {
+	max-width: 1140px;
+	margin:auto;
+	margin-top: 10px;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
@@ -173,6 +203,14 @@ li a{
 	color:red;
 }
 /* Sections */
+.titre-portfolio button{
+	border:none;
+	background-color: transparent;
+	font-size: 16px;
+	margin-left: 20px;
+	
+}
+
 #introduction {
 	display: flex;
 	align-items: center;
@@ -226,7 +264,8 @@ li a{
 	border:1px #1D6154 solid;
 	color:#1D6154;
 	padding:10px;
-	margin:30px 45px;
+	margin:10px 10px;
+	justify-content: space-around;
 }
 .btnStyle:hover{
 	background-color: #1D6154;

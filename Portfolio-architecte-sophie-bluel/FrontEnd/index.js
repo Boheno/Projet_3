@@ -11,6 +11,7 @@ const categories = await fetch("http://localhost:5678/api/categories")
   .then(categories => 
     categories.json())
 
+pageLogin()
 generateWorks(works);
 generateCategory(works);
 
@@ -30,6 +31,7 @@ console.log(window.localStorage.getItem("token"))
 //   }
 // )
 
+//Fonction génération des boutons
 function generateCategory(works) {
 
   // Création bouton "Tous"
@@ -90,7 +92,7 @@ function generateCategory(works) {
 }
 
 // Fonction génération des projets 
-export function generateWorks(works) {
+function generateWorks(works) {
   works.forEach(work => {;
   //for (let i=0; i<works.length; i++) {  => avec cette méthode, rajouter S à work et [i]
 
@@ -111,6 +113,52 @@ export function generateWorks(works) {
   }) 
 }
 //}
+
+function pageLogin(){
+  if (localStorage.getItem("token")){
+  document.querySelectorAll("#divBoutons");
+  divBoutons.style.display = "none";
+
+  // Bouton modifier
+  let btnModifier = document.createElement("button");
+  btnModifier.innerText = "Modifier";
+  document.querySelector(".titre-portfolio").appendChild(btnModifier);
+  // let newBtn = document.querySelector(".boutons");
+  // let btnModifier = document.createElement("div");
+  // btnModifier.innerText = "Modifier";
+  // newBtn.appendChild(btnModifier);
+  //Bandeau Header
+  let bandeauHeader = document.createElement("div");
+  let bandeauIcone = document.createElement ("i");
+  let bandeauText = document.createElement ("p");
+
+  bandeauHeader.classList.add("bandeau-header");
+  bandeauIcone.classList.add("fa-regular", "fa-pen-to-square");
+  bandeauText.innerText = "Mode édition";
+
+  bandeauHeader.appendChild(bandeauIcone);
+  bandeauHeader.appendChild(bandeauText);
+
+  document.body.prepend(bandeauHeader);
+
+  // Bouton "Logout"
+    let loginBtn = document.querySelector(".navBtn");
+    loginBtn.style.display = "block";
+    loginBtn.innerText = "logout";
+
+    loginBtn.onclick = () =>{
+    localStorage.removeItem("token");
+    window.location.href = "index.html";
+    }
+  } else{ 
+  let loginBtn = document.querySelector(".navBtn");
+  loginBtn.onclick = () =>{
+  window.location.href = "login.html";
+  }
+}
+
+
+}
 
 
 

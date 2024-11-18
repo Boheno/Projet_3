@@ -112,6 +112,7 @@ h3{
 	font-size: 30px;
 	display: flex;
 	justify-content: center;
+	align-items: center;
 }
 nav ul {
 	display: flex;
@@ -260,18 +261,17 @@ li a{
 
 /* Modale */
 .modal{
-	top: 20%;
+	top: 10%;
 	left: 20%;
-	/* right: 25%; */
 	padding: 20px;
 	position: fixed;
 	width: 60%;
-	height: 700px;
+	height: 80%;
 	background-color:white;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 	display:none;
 	justify-content: flex-end;
-	align-items: flex-start;
+	align-items: center;
 	z-index: 1000;
 	border-radius: 15px;
 	overflow: auto;
@@ -287,29 +287,24 @@ li a{
 	margin: 20px 50px;
 }
 .modal img{
-	width:17%;
+	width:15%;
 	margin:5px;
+	padding:5px;
 	z-index: 999;
 	position:relative;
 }
-.modal i{
+.modal .fa-trash-can{
 	z-index: 1000;
 	position:absolute;
 	color:white;
 	border: 2px black solid;
 	background-color: black;
-
-	
 }
-/* .image-modale{
-	display: flex;
-	flex-direction: row;
-	
-	width: 20%;
-} */
+
 .barre-modale{
 	opacity: 0.4;
 	width: 70%;
+	margin-top: 20px;
 }
 .modal-backGround {
 	position: fixed;
@@ -322,6 +317,13 @@ li a{
 	z-index: 999;
 	display: none;
 	
+}
+.titre-modale{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	
+	margin-bottom: 20px;
 }
 .close{
 	background-color: transparent;
@@ -336,20 +338,33 @@ li a{
 	justify-content: flex-end;
 }
 
-.modal form input {
-	height: 50px;
-	font-size: 1.2em;
-	border: none;
-	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-	justify-content: center;
+.ajoutPhoto{
+	top: 20%;
+	left: 20%;
+	padding: 20px;
+	position: fixed;
+	width: 60%;
+	height: 700px;
+	background-color:white;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	display:none;
+	justify-content: flex-end;
 	align-items: center;
+	z-index: 1000;
+	border-radius: 15px;
+	overflow: auto;
 }
+
 #form-ajout{
 	margin:10px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 /* #valider{
 	background-color: grey;

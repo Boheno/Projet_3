@@ -21,7 +21,7 @@ let loginRecuperation = await fetch("http://localhost:5678/api/users/login",{
         let token = data.token;
         console.log(token)
         localStorage.setItem("token", token);
-        window.location.href = "admin.html";
+        window.location.href = "index.html";
     } else {
         errorMessage.innerText = "Email ou mot de passe incorrect, veuillez essayer à nouveau";
     } 

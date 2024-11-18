@@ -32,14 +32,27 @@ function generateWorks(works) {
     }) 
   }
 
-//Fonction création de la modale et son contenu
+//Fonctions pour les modales
 let isModalCreated = false;
 
-async function modale (){
+//Fonction pour réinitialiser l'écran de la modale à son ouverture
+function resetModalContent(){
+    let initialElement = document.querySelectorAll(".titre-modale, .image-container, .barre-modale, .btn-connection");
+    initialElement.forEach(element =>{
+        element.style.display ="block";
+    })
+    let newElement = document.querySelectorAll(".ajoutPhoto");
+    newElement.forEach(element =>{
+        element.style.display = "none";
+    })
+}
+
+//Fonction création de la modale et son contenu
+function modale (){
     if(isModalCreated){
         document.querySelector(".modal").style.display ="block";
         document.querySelector(".modal-backGround").style.display ="block";
-        //document.querySelector(".ajoutPhoto").style.display = "none";
+        resetModalContent();
         return;
     }
 
@@ -59,123 +72,154 @@ async function modale (){
     modal.appendChild(modalContent);
 
     // Contenu de la modale: autre fonction?
-        //Titre modale
-        let titreModal = document.createElement("h3");
-        titreModal.classList.add("titre-modale");
-        titreModal.innerHTML = "Galerie photo";
-        modal.appendChild(titreModal);
+    //Titre modale
+    let titreModal = document.createElement("h3");
+    titreModal.classList.add("titre-modale");
+    titreModal.innerHTML = "Galerie photo";
+    modal.appendChild(titreModal);
     
-        //Images
-        let container = document.createElement("div");
-        container.classList.add("image-container");
+    //Images
+    let container = document.createElement("div");
+    container.classList.add("image-container");
 
-        works.forEach(work => {;
-        let imageModal = document.createElement("img");
-        imageModal.classList.add("img");
-        imageModal.src = work.imageUrl;
-        container.appendChild(imageModal);
+    works.forEach(work => {;
+    let imageModal = document.createElement("img");
+    imageModal.classList.add("img");
+    imageModal.src = work.imageUrl;
+    container.appendChild(imageModal);
 
-        let iconeTrash = document.createElement("i");
-        iconeTrash.classList.add("fa-solid", "fa-trash-can");
-        container.appendChild(iconeTrash);
+    let iconeTrash = document.createElement("i");
+    iconeTrash.classList.add("fa-solid", "fa-trash-can");
+    container.appendChild(iconeTrash);
 
-        modal.appendChild(container);
-        });
+    modal.appendChild(container);
+    });
         
-        //Barre séparation
-        let barreModale = document.createElement("hr");
-        barreModale.classList.add("barre-modale");
-        modal.appendChild(barreModale);
+    //Barre séparation
+    let barreModale = document.createElement("hr");
+    barreModale.classList.add("barre-modale");
+    modal.appendChild(barreModale);
 
-        //Bouton ajout photo
-        let btnAjoutPhoto = document.createElement("button");
-        btnAjoutPhoto.classList.add("btn-connection");
-        btnAjoutPhoto.innerHTML = "Ajouter une photo";
-        modal.appendChild(btnAjoutPhoto);
+    //Bouton ajout photo
+    let btnAjoutPhoto = document.createElement("button");
+    btnAjoutPhoto.classList.add("btn-connection");
+    btnAjoutPhoto.innerHTML = "Ajouter une photo";
+    modal.appendChild(btnAjoutPhoto);
 
-//Ouverture de l'autre fenêtre modale
-btnAjoutPhoto.onclick = function(){
-let modalAjout = document.createElement("div")
-modalAjout.classList.add("ajoutPhoto");
+    //Ouverture de l'autre fenêtre modale
+    btnAjoutPhoto.onclick = function(){
+    let modalAjout = document.querySelector(".ajoutPhoto");
 
-//flèche précedent <i class="fa-solid fa-arrow-left"></i>
+    if(!modalAjout){
+        modalAjout = document.createElement("div");
+        modalAjout.classList.add("ajoutPhoto");
+   
+    let modalContentAjout = document.createElement("div");
+    let closeBtnAjout     = document.createElement("button");
+    
+    modalContentAjout.classList.add("modal-content");
+    closeBtnAjout.classList.add("close");
+    closeBtnAjout.innerHTML ="&times;";
+    
+    modalContentAjout.appendChild(closeBtnAjout);
+    modalAjout.appendChild(modalContentAjout);
 
-let titreAjout = document.createElement("h3");
-titreAjout.classList.add("titre-modale");
-titreAjout.innerHTML = "Ajout photo";
-modal.appendChild(titreAjout);
+    let pagePrecedente = document.createElement("button");
+    let arrowPagePrecedente = document.createElement("i");
+    arrowPagePrecedente.classList.add("fa-solid", "fa-arrow-left");
+    pagePrecedente.appendChild(arrowPagePrecedente);
+    modalAjout.appendChild(pagePrecedente);
 
-//Ajout de projet: rectangle, logo img, btn ajouter photo, <p> jpg, png: 4mo max
+    //flèche précedent onclick à faire
 
-//Formulaire Titre et Catégorie
-let ajoutTitreProjet = document.createElement("form");
-let labelProjet = document.createElement("label");
-let inputProjet = document.createElement("input");
+    let titreAjout = document.createElement("h3");
+    titreAjout.classList.add("titre-modale");
+    titreAjout.innerHTML = "Ajout photo";
+    modalAjout.appendChild(titreAjout);
 
-labelProjet.textContent = "Titre";
-labelProjet.setAttribute("for", "form-ajout");
-inputProjet.setAttribute("type", "text");
-inputProjet.setAttribute("id", "form-ajout");
+    //Ajout de projet: rectangle, logo img, btn ajouter photo, <p> jpg, png: 4mo max
 
-ajoutTitreProjet.appendChild(labelProjet);
-ajoutTitreProjet.appendChild(inputProjet);
-modal.appendChild(ajoutTitreProjet);
+    //Formulaire Titre et Catégorie
+    let ajoutTitreProjet = document.createElement("form");
+    let labelProjet = document.createElement("label");
+    let inputProjet = document.createElement("input");
 
-let ajoutCategoryProjet = document.createElement("form");
-let labelCategory = document.createElement("label");
-let inputCategory = document.createElement("input");
+    labelProjet.textContent = "Titre";
+    labelProjet.setAttribute("for", "form-ajout");
+    inputProjet.setAttribute("type", "text");
+    inputProjet.setAttribute("id", "form-ajout");
 
-labelCategory.textContent = "Catégorie";
-labelCategory.setAttribute("for", "form-ajout");
-inputCategory.setAttribute("type", "text");
-inputCategory.setAttribute("id", "form-ajout");
+    ajoutTitreProjet.appendChild(labelProjet);
+    ajoutTitreProjet.appendChild(inputProjet);
+    modalAjout.appendChild(ajoutTitreProjet);
 
-ajoutCategoryProjet.appendChild(labelCategory);
-ajoutCategoryProjet.appendChild(inputCategory);
-modal.appendChild(ajoutCategoryProjet);
+    let ajoutCategoryProjet = document.createElement("form");
+    let labelCategory = document.createElement("label");
+    let inputCategory = document.createElement("input");
+
+    labelCategory.textContent = "Catégorie";
+    labelCategory.setAttribute("for", "form-ajout");
+    inputCategory.setAttribute("type", "text");
+    inputCategory.setAttribute("id", "form-ajout");
+
+    ajoutCategoryProjet.appendChild(labelCategory);
+    ajoutCategoryProjet.appendChild(inputCategory);
+    modalAjout.appendChild(ajoutCategoryProjet);
 
 
-//Barre séparation
-let barreModaleAjout = document.createElement("hr");
-barreModaleAjout.classList.add("barre-modale");
-modal.appendChild(barreModaleAjout);
+    //Barre séparation
+    let barreModaleAjout = document.createElement("hr");
+    barreModaleAjout.classList.add("barre-modale");
+    modalAjout.appendChild(barreModaleAjout);
 
-//Bouton valider
-let btnAjoutValide = document.createElement("button");
-btnAjoutValide.classList.add("btn-connection");
-btnAjoutValide.setAttribute("id", "valider");
-btnAjoutValide.innerHTML ="Valider";
-modal.appendChild(btnAjoutValide);
-//if champ remplis > clickable + changement background (gris > vert)
-
+    //Bouton valider
+    let btnAjoutValide = document.createElement("button");
+    btnAjoutValide.classList.add("btn-connection");
+    btnAjoutValide.setAttribute("id", "valider");
+    btnAjoutValide.innerHTML ="Valider";
+    modalAjout.appendChild(btnAjoutValide);
+    //if champ remplis > clickable + changement background (gris > vert)
+    
+    document.body.appendChild(modalAjout);
+    //modalAjout.style.display = "block";
+}
 
     titreModal.style.display="none";
     container.style.display="none";
     barreModale.style.display="none";
     btnAjoutPhoto.style.display="none";
+    modalAjout.style.display = "block";
+    
 }
 
     document.querySelector("main").appendChild(backGroundModal);
     document.body.appendChild(modal);
-
+    
     backGroundModal.style.display = "block";
     modal.style.display           = "block";
     
 
     isModalCreated = true;
 
-
-
     //Fermeture de la modale
     closeBtn.onclick = function (){
             modal.style.display           = "none";
-            backGroundModal.style.display ="none";
+            backGroundModal.style.display = "none";
+
+            let modalAjout = document.querySelector(".ajoutPhoto");
+            if (modalAjout) {
+                modalAjout.style.display = "none";
+            }
     }
     backGroundModal.onclick = function (event){
         if (event.target === backGroundModal){
             modal.style.display           = "none";
             backGroundModal.style.display = "none";
         }
+        let modalAjout = document.querySelector(".ajoutPhoto");
+            if (modalAjout) {
+                modalAjout.style.display = "none";
+            }
     }
 }
 
