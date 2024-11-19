@@ -103,6 +103,7 @@ export function modale (){
 
     let pagePrecedente = document.createElement("button");
     let arrowPagePrecedente = document.createElement("i");
+    pagePrecedente.classList.add("button-precedent");
     arrowPagePrecedente.classList.add("fa-solid", "fa-arrow-left");
     pagePrecedente.appendChild(arrowPagePrecedente);
     modalAjout.appendChild(pagePrecedente);
@@ -175,11 +176,14 @@ export function modale (){
     modalAjout.appendChild(barreModaleAjout);
 
     //Bouton valider
+    let divBtn = document.createElement("div");
     let btnAjoutValide = document.createElement("button");
+    divBtn.classList.add("div-btn");
     btnAjoutValide.classList.add("btn-connection");
     btnAjoutValide.setAttribute("id", "valider");
     btnAjoutValide.innerHTML ="Valider";
-    modalAjout.appendChild(btnAjoutValide);
+    divBtn.appendChild(btnAjoutValide);
+    modalAjout.appendChild(divBtn);
     //if champ remplis > clickable + changement background (gris > vert)
     
     document.body.appendChild(modalAjout);

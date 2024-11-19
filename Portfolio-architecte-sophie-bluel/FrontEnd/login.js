@@ -17,9 +17,7 @@ let loginRecuperation = await fetch("http://localhost:5678/api/users/login",{
 .then(async response =>  {
     if (response.ok) {
         const data = await response.json();
-        console.log(data.token)
         let token = data.token;
-        console.log(token)
         localStorage.setItem("token", token);
         window.location.href = "index.html";
     } else {

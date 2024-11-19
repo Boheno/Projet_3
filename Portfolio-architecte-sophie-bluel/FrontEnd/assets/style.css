@@ -389,6 +389,11 @@ li a{
 	border-radius: 15px;
 	overflow: auto;
 }
+.button-precedent{
+	border:none;
+	background-color: transparent;
+	font-size: 18px;
+}
 .ajoutPhoto form{
 	display: flex;
 	flex-direction: column;
@@ -428,6 +433,7 @@ li a{
 	width:25%;
 	padding:15px;
 	margin:10px;
+	cursor: pointer;
 }
 .condition-photo{
 	width: 25%;
@@ -435,10 +441,14 @@ li a{
 	margin-left: 50px;
 	margin-bottom: 20px;
 }
-.ajoutPhoto .btn-connection{
+
+.div-btn{
 	align-items: center;
 	justify-content: center;
-	
+	display: flex;
+}
+.div-btn .btn-connection{
+	cursor: pointer;
 }
 
 /* Formulaire de contact page projets */
