@@ -8,36 +8,13 @@ const works = await fetch("http://localhost:5678/api/works")
       return reponse.json();
     } 
   })
-  generateWorks(works);
-
-
-function generateWorks(works) {
-    works.forEach(work => {;
-    //for (let i=0; i<works.length; i++) {  => avec cette méthode, rajouter S à work et [i]
-  
-      let worksElement  = document.createElement("figure");
-      let imageWorks    = document.createElement("img");
-      let captionWorks  = document.createElement("figcaption");
-  
-      imageWorks.src          = work.imageUrl;
-      captionWorks.innerText  = work.title;
-      worksElement.setAttribute("data-categorie", work.categoryId)
-      worksElement.classList.add("projet");
-  
-      worksElement.appendChild(imageWorks);
-      worksElement.appendChild(captionWorks);
-      
-      document.querySelectorAll(".gallery").innerHTML = worksElement;
-      document.querySelector(".gallery").appendChild(worksElement);
-    }) 
-  }
 
 //Fonctions pour les modales
 let isModalCreated = false;
 
 //Fonction pour réinitialiser l'écran de la modale à son ouverture
-function resetModalContent(){
-    let initialElement = document.querySelectorAll(".titre-modale, .image-container, .barre-modale, .btn-connection");
+export function resetModalContent(){
+    let initialElement = document.querySelectorAll(".titre-modale, .image-container, .close, .barre-modale, .btn-connection");
     initialElement.forEach(element =>{
         element.style.display ="block";
     })
@@ -48,7 +25,7 @@ function resetModalContent(){
 }
 
 //Fonction création de la modale et son contenu
-function modale (){
+export function modale (){
     if(isModalCreated){
         document.querySelector(".modal").style.display ="block";
         document.querySelector(".modal-backGround").style.display ="block";
@@ -131,6 +108,15 @@ function modale (){
     modalAjout.appendChild(pagePrecedente);
 
     //flèche précedent onclick à faire
+    pagePrecedente.onclick = () => {
+        modal.style.display         ="block";
+        titreModal.style.display    ="block";
+        container.style.display     ="block";
+        modalContent.style.display  ="block";
+        barreModale.style.display   ="block";
+        btnAjoutPhoto.style.display ="block";
+        modalAjout.style.display    ="none";
+    }
 
     let titreAjout = document.createElement("h3");
     titreAjout.classList.add("titre-modale");
@@ -138,6 +124,22 @@ function modale (){
     modalAjout.appendChild(titreAjout);
 
     //Ajout de projet: rectangle, logo img, btn ajouter photo, <p> jpg, png: 4mo max
+    let fenetreAjout = document.createElement("div");
+    let iconeFenetre = document.createElement("i");
+    let ajoutFormulaire = document.createElement("button");
+    ajoutFormulaire.innerHTML = "+ Ajouter photo";
+    let conditionPhoto = document.createElement("p");
+    conditionPhoto.innerHTML = "jpg, png: 4mo max";
+
+    conditionPhoto.classList.add("condition-photo");
+    ajoutFormulaire.classList.add("ajout-formulaire");
+    iconeFenetre.classList.add("fa-regular", "fa-image");
+    fenetreAjout.classList.add("fenetre-ajout");
+    
+    fenetreAjout.appendChild(iconeFenetre);
+    fenetreAjout.appendChild(ajoutFormulaire);
+    fenetreAjout.appendChild(conditionPhoto);
+    modalAjout.appendChild(fenetreAjout);
 
     //Formulaire Titre et Catégorie
     let ajoutTitreProjet = document.createElement("form");
@@ -183,13 +185,14 @@ function modale (){
     document.body.appendChild(modalAjout);
     //modalAjout.style.display = "block";
 }
-
     titreModal.style.display="none";
     container.style.display="none";
+    modalContent.style.display="none";
     barreModale.style.display="none";
     btnAjoutPhoto.style.display="none";
+    modal.style.display="none";
+
     modalAjout.style.display = "block";
-    
 }
 
     document.querySelector("main").appendChild(backGroundModal);
@@ -198,7 +201,6 @@ function modale (){
     backGroundModal.style.display = "block";
     modal.style.display           = "block";
     
-
     isModalCreated = true;
 
     //Fermeture de la modale
@@ -222,7 +224,3 @@ function modale (){
             }
     }
 }
-
-//Ouverture modale
-let openModalBtn = document.querySelector("button");
-openModalBtn.onclick = () => modale();

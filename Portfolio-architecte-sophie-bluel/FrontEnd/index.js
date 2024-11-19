@@ -1,3 +1,5 @@
+import {modale} from "./modales.js";
+
 // Récupération des projets
 const works = await fetch("http://localhost:5678/api/works")
   .then(reponse => {
@@ -6,14 +8,16 @@ const works = await fetch("http://localhost:5678/api/works")
     } 
   })
 
-// Récupération des catégories
+  // Récupération des catégories
 const categories = await fetch("http://localhost:5678/api/categories")
   .then(categories => 
     categories.json())
 
-pageLogin()
+pageLogin();
 generateWorks(works);
 generateCategory(works);
+
+//resetModalContent();
 
 console.log(window.localStorage.getItem("token"))
   /* Ajout d'un nouveau projet pour tester */
@@ -121,12 +125,14 @@ function pageLogin(){
 
   // Bouton modifier
   let btnModifier = document.createElement("button");
+  btnModifier.setAttribute("id", "btn-modifier");
   btnModifier.innerText = "Modifier";
-  document.querySelector(".titre-portfolio").appendChild(btnModifier);
-  // let newBtn = document.querySelector(".boutons");
-  // let btnModifier = document.createElement("div");
-  // btnModifier.innerText = "Modifier";
-  // newBtn.appendChild(btnModifier);
+  btnModifier.onclick = () => modale();
+  let btnIcone = document.createElement("i");
+  btnIcone.classList.add("fa-regular", "fa-pen-to-square");
+  btnModifier.appendChild(btnIcone)
+  document.querySelector("#titreProjets").appendChild(btnModifier);
+
   //Bandeau Header
   let bandeauHeader = document.createElement("div");
   let bandeauIcone = document.createElement ("i");

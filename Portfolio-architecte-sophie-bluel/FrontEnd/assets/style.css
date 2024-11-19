@@ -68,7 +68,7 @@ body > .bandeau-header{
 	margin-bottom:40px;
 	
 }
-.fa-pen-to-square{
+.bandeau-header .fa-pen-to-square{
 	display:flex;
 	align-items: center;
 	justify-content: center;
@@ -112,6 +112,13 @@ h2{
 	font-weight: 700;
 	font-size: 30px;
 	color: #1D6154
+}
+h3{
+	font-family: 'Work Sans';
+	font-size: 30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 nav ul {
 	display: flex;
@@ -203,12 +210,23 @@ li a{
 	color:red;
 }
 /* Sections */
-.titre-portfolio button{
+#titreProjets {
+	display: flex;
+	justify-content: center;
+}
+
+#titreProjets button{
 	border:none;
 	background-color: transparent;
 	font-size: 16px;
+	height: 30px;
 	margin-left: 20px;
-	
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+#titreProjets i{
+	color:black;
 }
 
 #introduction {
@@ -276,6 +294,153 @@ li a{
 	background-color: #1D6154;
 	color:white;
 }
+
+/* Modale */
+.modal{
+	top: 10%;
+	left: 25%;
+	padding: 20px;
+	position: fixed;
+	width: 60%;
+	height: 70%;
+	background-color:white;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	display:none;
+	justify-content: flex-end;
+	align-items: center;
+	z-index: 1000;
+	border-radius: 15px;
+	overflow: auto;
+
+}
+.modal button{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+.image-container{
+	margin: 20px 50px;
+}
+.modal img{
+	width:15%;
+	margin:5px;
+	padding:5px;
+	z-index: 999;
+	position:relative;
+}
+.modal .fa-trash-can{
+	z-index: 1000;
+	position:absolute;
+	color:white;
+	border: 2px black solid;
+	background-color: black;
+}
+
+.barre-modale{
+	opacity: 0.4;
+	width: 70%;
+	margin-top: 20px;
+}
+.modal-backGround {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 999;
+	display: none;
+}
+.titre-modale{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	
+	margin-bottom: 20px;
+}
+.close{
+	background-color: transparent;
+	color:black;
+	border: none;
+	cursor: pointer;
+	height: 30px;
+	font-size: 25px;
+}
+.modal-content{
+	display: flex;
+	justify-content: flex-end;
+}
+
+.ajoutPhoto{
+	top: 10%;
+	left: 25%;
+	padding: 20px;
+	position: fixed;
+	width: 60%;
+	height: 70%;
+	background-color:white;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	display:none;
+	justify-content: flex-end;
+	align-items: center;
+	z-index: 1000;
+	border-radius: 15px;
+	overflow: auto;
+}
+.ajoutPhoto form{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+#form-ajout{
+	margin:10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+/* Fenêtre d'ajout photos */
+.fenetre-ajout{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: #D6EAF8;
+	margin:40px;
+}
+.fenetre-ajout .fa-image{
+	opacity: 0.3;
+	color:grey;
+	font-size: 90px;
+}
+.ajout-formulaire{
+	background-color: #C0CFD7;
+	border-radius: 25px;
+	border:none;
+	width:25%;
+	padding:15px;
+	margin:10px;
+}
+.condition-photo{
+	width: 25%;
+	align-items: center;
+	margin-left: 50px;
+	margin-bottom: 20px;
+}
+.ajoutPhoto .btn-connection{
+	align-items: center;
+	justify-content: center;
+	
+}
+
 /* Formulaire de contact page projets */
 #contact {
 	width: 50%;
