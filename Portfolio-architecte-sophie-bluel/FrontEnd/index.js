@@ -130,7 +130,7 @@ function pageLogin(){
   btnModifier.onclick = () => modale();
   let btnIcone = document.createElement("i");
   btnIcone.classList.add("fa-regular", "fa-pen-to-square");
-  btnModifier.appendChild(btnIcone)
+  btnModifier.prepend(btnIcone)
   document.querySelector("#titreProjets").appendChild(btnModifier);
 
   //Bandeau Header

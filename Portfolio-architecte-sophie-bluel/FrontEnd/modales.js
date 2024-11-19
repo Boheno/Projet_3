@@ -1,4 +1,4 @@
-//import {generateWorks} from "./projets.js";
+import {suppressionProjets} from "./requetes.js";
 
 
 // Récupération des projets
@@ -8,6 +8,10 @@ const works = await fetch("http://localhost:5678/api/works")
       return reponse.json();
     } 
   })
+// Récupération des catégories
+const categories = await fetch("http://localhost:5678/api/categories")
+  .then(categories => 
+    categories.json())
 
 //Fonctions pour les modales
 let isModalCreated = false;
@@ -62,12 +66,16 @@ export function modale (){
     works.forEach(work => {;
     let imageModal = document.createElement("img");
     imageModal.classList.add("img");
+    imageModal.setAttribute("id", work["id"])
     imageModal.src = work.imageUrl;
     container.appendChild(imageModal);
 
     let iconeTrash = document.createElement("i");
     iconeTrash.classList.add("fa-solid", "fa-trash-can");
+    iconeTrash.setAttribute("id", work["id"])
     container.appendChild(iconeTrash);
+
+    iconeTrash.onclick = () => suppressionProjets();
 
     modal.appendChild(container);
     });
@@ -108,7 +116,7 @@ export function modale (){
     pagePrecedente.appendChild(arrowPagePrecedente);
     modalAjout.appendChild(pagePrecedente);
 
-    //flèche précedent onclick à faire
+    //flèche précedent
     pagePrecedente.onclick = () => {
         modal.style.display         ="block";
         titreModal.style.display    ="block";
@@ -158,17 +166,24 @@ export function modale (){
 
     let ajoutCategoryProjet = document.createElement("form");
     let labelCategory = document.createElement("label");
-    let inputCategory = document.createElement("input");
+    let inputCategory = document.createElement("select");
 
     labelCategory.textContent = "Catégorie";
-    labelCategory.setAttribute("for", "form-ajout");
+    labelCategory.setAttribute("for", "category-select");
     inputCategory.setAttribute("type", "text");
-    inputCategory.setAttribute("id", "form-ajout");
+    inputCategory.setAttribute("id", "category-select");
 
     ajoutCategoryProjet.appendChild(labelCategory);
     ajoutCategoryProjet.appendChild(inputCategory);
     modalAjout.appendChild(ajoutCategoryProjet);
 
+    for (let i = 0; i < categories.length; i++) {
+        let newCategory = document.createElement("option");
+        newCategory.textContent = categories[i]["name"];
+        newCategory.setAttribute("data-id-categorie", categories[i]["id"]);
+        newCategory.classList.add("list-category");
+        inputCategory.appendChild(newCategory);
+    }
 
     //Barre séparation
     let barreModaleAjout = document.createElement("hr");
@@ -189,12 +204,12 @@ export function modale (){
     document.body.appendChild(modalAjout);
     //modalAjout.style.display = "block";
 }
-    titreModal.style.display="none";
-    container.style.display="none";
-    modalContent.style.display="none";
-    barreModale.style.display="none";
-    btnAjoutPhoto.style.display="none";
-    modal.style.display="none";
+    titreModal.style.display    ="none";
+    container.style.display     ="none";
+    modalContent.style.display  ="none";
+    barreModale.style.display   ="none";
+    btnAjoutPhoto.style.display ="none";
+    modal.style.display         ="none";
 
     modalAjout.style.display = "block";
 }
