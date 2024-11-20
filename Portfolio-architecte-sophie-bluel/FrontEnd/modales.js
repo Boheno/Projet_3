@@ -1,4 +1,5 @@
 import {suppressionProjets} from "./requetes.js";
+import {ajoutProjet} from "./requetes.js";
 
 
 // Récupération des projets
@@ -18,7 +19,7 @@ let isModalCreated = false;
 
 //Fonction pour réinitialiser l'écran de la modale à son ouverture
 export function resetModalContent(){
-    let initialElement = document.querySelectorAll(".titre-modale, .image-container, .close, .barre-modale, .btn-connection");
+    let initialElement = document.querySelectorAll(".modal");
     initialElement.forEach(element =>{
         element.style.display ="block";
     })
@@ -64,18 +65,21 @@ export function modale (){
     container.classList.add("image-container");
 
     works.forEach(work => {;
+    let divimg = document.createElement("div");
+    divimg.classList.add("div-img");
     let imageModal = document.createElement("img");
     imageModal.classList.add("img");
     imageModal.setAttribute("id", work["id"])
     imageModal.src = work.imageUrl;
-    container.appendChild(imageModal);
+    divimg.appendChild(imageModal);
+    container.appendChild(divimg);
 
     let iconeTrash = document.createElement("i");
-    iconeTrash.classList.add("fa-solid", "fa-trash-can");
-    iconeTrash.setAttribute("id", work["id"])
+    iconeTrash.classList.add("fa-solid", "fa-trash-can", "icone");
+    iconeTrash.id = work["id"]
     container.appendChild(iconeTrash);
 
-    iconeTrash.onclick = () => suppressionProjets();
+    iconeTrash.onclick = () => suppressionProjets(iconeTrash.id);
 
     modal.appendChild(container);
     });
@@ -119,11 +123,6 @@ export function modale (){
     //flèche précedent
     pagePrecedente.onclick = () => {
         modal.style.display         ="block";
-        titreModal.style.display    ="block";
-        container.style.display     ="block";
-        modalContent.style.display  ="block";
-        barreModale.style.display   ="block";
-        btnAjoutPhoto.style.display ="block";
         modalAjout.style.display    ="none";
     }
 
@@ -136,19 +135,40 @@ export function modale (){
     let fenetreAjout = document.createElement("div");
     let iconeFenetre = document.createElement("i");
     let ajoutFormulaire = document.createElement("button");
-    ajoutFormulaire.innerHTML = "+ Ajouter photo";
     let conditionPhoto = document.createElement("p");
+    let inputPhoto = document.createElement("input");
+    
     conditionPhoto.innerHTML = "jpg, png: 4mo max";
-
+    ajoutFormulaire.innerHTML = "+ Ajouter photo";
     conditionPhoto.classList.add("condition-photo");
     ajoutFormulaire.classList.add("ajout-formulaire");
     iconeFenetre.classList.add("fa-regular", "fa-image");
     fenetreAjout.classList.add("fenetre-ajout");
+    inputPhoto.type = "file";
+    inputPhoto.style.display = "none";
     
     fenetreAjout.appendChild(iconeFenetre);
     fenetreAjout.appendChild(ajoutFormulaire);
     fenetreAjout.appendChild(conditionPhoto);
+    fenetreAjout.appendChild(inputPhoto);
     modalAjout.appendChild(fenetreAjout);
+
+    ajoutFormulaire.onclick = () => { inputPhoto.click();};
+    inputPhoto.addEventListener("change", (event)=>{
+        let file = event.target.files[0];
+        if (file){
+            let reader = new FileReader();
+            reader.onload = (e) => {
+                let newImage = document.createElement("img");
+                newImage.src = e.target.result;
+                newImage.classList.add("new-img");
+                fenetreAjout.replaceChild(newImage, iconeFenetre);
+                ajoutFormulaire.style.display = "none";
+                conditionPhoto.style.display = "none";
+            };
+            reader.readAsDataURL(file);
+        }
+    })
 
     //Formulaire Titre et Catégorie
     let ajoutTitreProjet = document.createElement("form");
@@ -177,6 +197,10 @@ export function modale (){
     ajoutCategoryProjet.appendChild(inputCategory);
     modalAjout.appendChild(ajoutCategoryProjet);
 
+    let blanckCategory = document.createElement("option");
+    blanckCategory.textContent = "";
+    inputCategory.appendChild(blanckCategory);
+
     for (let i = 0; i < categories.length; i++) {
         let newCategory = document.createElement("option");
         newCategory.textContent = categories[i]["name"];
@@ -200,17 +224,12 @@ export function modale (){
     divBtn.appendChild(btnAjoutValide);
     modalAjout.appendChild(divBtn);
     //if champ remplis > clickable + changement background (gris > vert)
+
+    btnAjoutValide.onclick = () => ajoutProjet();
     
     document.body.appendChild(modalAjout);
-    //modalAjout.style.display = "block";
+    modalAjout.style.display = "block";
 }
-    titreModal.style.display    ="none";
-    container.style.display     ="none";
-    modalContent.style.display  ="none";
-    barreModale.style.display   ="none";
-    btnAjoutPhoto.style.display ="none";
-    modal.style.display         ="none";
-
     modalAjout.style.display = "block";
 }
 

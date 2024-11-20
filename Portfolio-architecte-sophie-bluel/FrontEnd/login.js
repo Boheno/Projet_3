@@ -37,22 +37,3 @@ function btnConnecter (){
     };
 }
 btnConnecter()
-
-//Fonction gestion d'erreurs identification
-// let form = document.getElementById("form");
-
-// function gestionErreurs(form){
-// let champsInput = document.querySelectorAll(".input-form");
-// champsInput.addEventListener ("submit",(event)=> {
-//     event.preventDefault()
-//     let inputEmail = document.getElementById("userEmail");
-//     //let inputPassword = document.getElementById("password");
-//     let valeurInput = inputEmail.value;
-
-//     if (valeurInput === ""){
-//         console.log("le champ est vide")
-//     } else{
-//         console.log ("le champ est rempli")
-//     };
-// })   
-// }
