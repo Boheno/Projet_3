@@ -1,10 +1,11 @@
 //Fonction de suppression de travaux, la page ne doit pas être rechargée pour voir la modif
 export async function suppressionProjets(id) {
+    const token = localStorage.getItem("token");
     let response = await fetch(`http://localhost:5678/api/works/${id}`, {
         method: "DELETE",
         headers: {
-            'Authorization': `Bearer ${localStorage.getItem("token")}`,
-            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
         }
     })
 }

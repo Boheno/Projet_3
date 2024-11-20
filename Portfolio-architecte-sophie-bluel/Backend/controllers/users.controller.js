@@ -26,7 +26,6 @@ exports.signup = async (req, res) => {
 }
 
 exports.login = async (req, res) => {
-	console.log(req)
 	const user = await Users.findOne({where: {email: req.body.email}});
 	if(user === null){
 		return res.status(404).json({message: 'user not found'})
@@ -39,9 +38,8 @@ exports.login = async (req, res) => {
 			userId: user.id,
 			token: jwt.sign(
 				{userId : user.id},
-				//process.env.SECRET_TOKEN,
-				"F3Q6D10AXCP2NMR2Q8QITZ2Z",
-				{ expiresIn: '24h' }
+				process.env.SECRET_TOKEN,
+				{ expiresIn: '365d' }
 			)
 		})
 

@@ -17,7 +17,7 @@ pageLogin();
 generateWorks(works);
 generateCategory(works);
 
-console.log(window.localStorage.getItem("token"))
+// console.log(window.localStorage.getItem("token"))
   /* Ajout d'un nouveau projet pour tester */
 //   works.push(
 //       {
