@@ -17,8 +17,6 @@ pageLogin();
 generateWorks(works);
 generateCategory(works);
 
-//resetModalContent();
-
 console.log(window.localStorage.getItem("token"))
   /* Ajout d'un nouveau projet pour tester */
 //   works.push(
@@ -98,8 +96,6 @@ function generateCategory(works) {
 // Fonction génération des projets 
 function generateWorks(works) {
   works.forEach(work => {;
-  //for (let i=0; i<works.length; i++) {  => avec cette méthode, rajouter S à work et [i]
-
     let worksElement  = document.createElement("figure");
     let imageWorks    = document.createElement("img");
     let captionWorks  = document.createElement("figcaption");
@@ -116,7 +112,6 @@ function generateWorks(works) {
     document.querySelector(".gallery").appendChild(worksElement);
   }) 
 }
-//}
 
 function pageLogin(){
   if (localStorage.getItem("token")){
@@ -162,9 +157,4 @@ function pageLogin(){
   window.location.href = "login.html";
   }
 }
-
-
 }
-
-
-

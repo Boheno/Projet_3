@@ -1,5 +1,4 @@
 //Fonction de suppression de travaux, la page ne doit pas être rechargée pour voir la modif
-
 export async function suppressionProjets(id) {
     let response = await fetch(`http://localhost:5678/api/works/${id}`, {
         method: "DELETE",
@@ -24,7 +23,9 @@ export async function ajoutProjet (){
 
     let envoieProjetForm = await fetch("http://localhost:5678/api/works", {
     method:"POST",
-    headers:{"Content-type":"application/json"},
+    headers:{
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+        "Content-type":"application/json"},
     body: JSON.stringify(donneesProjet)
     })
 .then(response =>response.json())

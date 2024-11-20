@@ -303,8 +303,8 @@ li a{
 	padding: 20px;
 	margin:0;
 	position: fixed;
-	width: 60%;
-	height: 70%;
+	width: 700px;
+	height: 600px;
 	background-color:white;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 	display:none;
@@ -359,7 +359,6 @@ li a{
 	right: 5px;
 	height: 15px;
 }
-
 .barre-modale{
 	opacity: 0.4;
 	width: 70%;
@@ -389,20 +388,20 @@ li a{
 	cursor: pointer;
 	height: 30px;
 	font-size: 25px;
+	
 }
 .modal-content{
 	display: flex;
 	justify-content: flex-end;
 	
 }
-
 .ajoutPhoto{
 	top: 10%;
 	left: 25%;
 	padding: 20px;
 	position: fixed;
-	width: 60%;
-	height: 70%;
+	width: 700px;
+	height: 600px;
 	background-color:white;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 	display:none;
@@ -416,15 +415,16 @@ li a{
 	border:none;
 	background-color: transparent;
 	font-size: 18px;
+	
 }
-.ajoutPhoto form{
+.div-form{
 	display: flex;
-	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	flex-direction: column;
+	
 }
-
-#form-ajout{
+#form-ajout {
 	margin:10px;
 	display: flex;
 	flex-direction: column;
@@ -434,17 +434,24 @@ li a{
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	width: 497px;
+}
+.ajoutPhoto label{
+	margin-left: 10px;
+	margin-top: 10px;
 }
 #category-select{
-	height: 50px;
 	margin:10px;
-	width: 250px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-	text-align: center;
 	background-color: white;
-	color:black;
+	width: 500px;
 }
 .list-category{
 	font-size: 14px;
@@ -458,7 +465,9 @@ li a{
 	justify-content: center;
 	align-items: center;
 	background-color: #D6EAF8;
-	margin:40px;
+	margin-left:100px;
+	margin-bottom: 10px;
+	width:71%;
 }
 .fenetre-ajout .fa-image{
 	opacity: 0.3;
@@ -470,15 +479,20 @@ li a{
 	border-radius: 25px;
 	border:none;
 	width:25%;
-	padding:15px;
+	padding:10px;
 	margin:10px;
 	cursor: pointer;
 }
 .condition-photo{
-	width: 25%;
+	width: 30%;
 	align-items: center;
-	margin-left: 50px;
+	margin-left: 20px;
 	margin-bottom: 20px;
+}
+.new-img{
+	box-sizing: border-box;
+	height: 200px;
+	object-fit:contain;
 }
 
 .div-btn{
@@ -488,6 +502,7 @@ li a{
 }
 .div-btn .btn-connection{
 	cursor: pointer;
+	margin:20px;
 }
 
 /* Formulaire de contact page projets */

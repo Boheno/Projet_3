@@ -171,6 +171,8 @@ export function modale (){
     })
 
     //Formulaire Titre et Catégorie
+    let divForm = document.createElement("div");
+    divForm.classList.add("div-form");
     let ajoutTitreProjet = document.createElement("form");
     let labelProjet = document.createElement("label");
     let inputProjet = document.createElement("input");
@@ -182,7 +184,7 @@ export function modale (){
 
     ajoutTitreProjet.appendChild(labelProjet);
     ajoutTitreProjet.appendChild(inputProjet);
-    modalAjout.appendChild(ajoutTitreProjet);
+    divForm.appendChild(ajoutTitreProjet);
 
     let ajoutCategoryProjet = document.createElement("form");
     let labelCategory = document.createElement("label");
@@ -195,7 +197,7 @@ export function modale (){
 
     ajoutCategoryProjet.appendChild(labelCategory);
     ajoutCategoryProjet.appendChild(inputCategory);
-    modalAjout.appendChild(ajoutCategoryProjet);
+    divForm.appendChild(ajoutCategoryProjet);
 
     let blanckCategory = document.createElement("option");
     blanckCategory.textContent = "";
@@ -207,6 +209,8 @@ export function modale (){
         newCategory.setAttribute("data-id-categorie", categories[i]["id"]);
         newCategory.classList.add("list-category");
         inputCategory.appendChild(newCategory);
+
+        modalAjout.appendChild(divForm);
     }
 
     //Barre séparation
