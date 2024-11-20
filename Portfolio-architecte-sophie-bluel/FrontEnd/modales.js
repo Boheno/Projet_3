@@ -63,6 +63,7 @@ export function modale (){
     //Images
     let container = document.createElement("div");
     container.classList.add("image-container");
+    modal.appendChild(container);
 
     works.forEach(work => {;
     let divimg = document.createElement("div");
@@ -71,17 +72,16 @@ export function modale (){
     imageModal.classList.add("img");
     imageModal.setAttribute("id", work["id"])
     imageModal.src = work.imageUrl;
-    divimg.appendChild(imageModal);
-    container.appendChild(divimg);
 
     let iconeTrash = document.createElement("i");
     iconeTrash.classList.add("fa-solid", "fa-trash-can", "icone");
     iconeTrash.id = work["id"]
-    container.appendChild(iconeTrash);
-
+    
     iconeTrash.onclick = () => suppressionProjets(iconeTrash.id);
 
-    modal.appendChild(container);
+    divimg.appendChild(imageModal);
+    divimg.appendChild(iconeTrash);
+    container.appendChild(divimg);
     });
         
     //Barre séparation
