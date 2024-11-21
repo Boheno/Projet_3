@@ -17,7 +17,7 @@ export async function ajoutProjet (){
     let categoriesAjout = document.getElementById("category-select").value;
 
     let donneesProjet = {
-        Image: photo,
+        image: photo,
         title: titre,
         category: categoriesAjout
     }

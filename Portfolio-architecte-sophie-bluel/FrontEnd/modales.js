@@ -26,6 +26,7 @@ export function resetModalContent(){
     let newElement = document.querySelectorAll(".ajoutPhoto");
     newElement.forEach(element =>{
         element.style.display = "none";
+       // element.value="";
     })
 }
 
@@ -37,7 +38,7 @@ export function modale (){
         resetModalContent();
         return;
     }
-
+    //Bouton fermeture
     let backGroundModal = document.createElement("div");
     backGroundModal.classList.add("modal-backGround");
 
@@ -72,7 +73,7 @@ export function modale (){
     imageModal.classList.add("img");
     imageModal.setAttribute("id", work["id"])
     imageModal.src = work.imageUrl;
-
+    //Icone poubelle
     let iconeTrash = document.createElement("i");
     iconeTrash.classList.add("fa-solid", "fa-trash-can", "icone");
     iconeTrash.id = work["id"]
@@ -102,17 +103,24 @@ export function modale (){
     if(!modalAjout){
         modalAjout = document.createElement("div");
         modalAjout.classList.add("ajoutPhoto");
-   
+   //Bouton fermeture
     let modalContentAjout = document.createElement("div");
     let closeBtnAjout     = document.createElement("button");
     
     modalContentAjout.classList.add("modal-content");
     closeBtnAjout.classList.add("close");
+    closeBtnAjout.classList.add("ajout");
     closeBtnAjout.innerHTML ="&times;";
     
     modalContentAjout.appendChild(closeBtnAjout);
     modalAjout.appendChild(modalContentAjout);
-
+    //Fermeture fenêtre
+    closeBtnAjout.onclick = function(){
+        fermetureModale(modal);
+        fermetureModale(backGroundModal);
+        fermetureModale(document.querySelector(".ajoutPhoto"));
+    }
+    //Flèche page précédente
     let pagePrecedente = document.createElement("button");
     let arrowPagePrecedente = document.createElement("i");
     pagePrecedente.classList.add("button-precedent");
@@ -120,12 +128,12 @@ export function modale (){
     pagePrecedente.appendChild(arrowPagePrecedente);
     modalAjout.appendChild(pagePrecedente);
 
-    //flèche précedent
     pagePrecedente.onclick = () => {
         modal.style.display         ="block";
         modalAjout.style.display    ="none";
     }
 
+    //Titre page
     let titreAjout = document.createElement("h3");
     titreAjout.classList.add("titre-modale");
     titreAjout.innerHTML = "Ajout photo";
@@ -171,6 +179,7 @@ export function modale (){
     })
 
     //Formulaire Titre et Catégorie
+    //Titre
     let divForm = document.createElement("div");
     divForm.classList.add("div-form");
     let ajoutTitreProjet = document.createElement("form");
@@ -185,7 +194,7 @@ export function modale (){
     ajoutTitreProjet.appendChild(labelProjet);
     ajoutTitreProjet.appendChild(inputProjet);
     divForm.appendChild(ajoutTitreProjet);
-
+    //Catégories
     let ajoutCategoryProjet = document.createElement("form");
     let labelCategory = document.createElement("label");
     let inputCategory = document.createElement("select");
@@ -221,13 +230,30 @@ export function modale (){
     //Bouton valider
     let divBtn = document.createElement("div");
     let btnAjoutValide = document.createElement("button");
+
     divBtn.classList.add("div-btn");
     btnAjoutValide.classList.add("btn-connection");
     btnAjoutValide.setAttribute("id", "valider");
     btnAjoutValide.innerHTML ="Valider";
+
     divBtn.appendChild(btnAjoutValide);
     modalAjout.appendChild(divBtn);
-    //if champ remplis > clickable + changement background (gris > vert)
+
+    // function verifierChamps(){
+    //     let champs = document.querySelectorAll("input");
+    //     //let champSelect = document.querySelector("select");
+    //     let champsRemplis = Array.from(champs).every((input) => input.value.trim() !=="");
+    //     //let chanmpsSelectRemplis = Array.from(champSelect).every((select) => select.value.trim() !=="");
+
+    //     if (champsRemplis){
+    //         btnAjoutValide.classList.add("active");
+    //         btnAjoutValide.disabled = false;
+    //     } else {
+    //         btnAjoutValide.classList.remove("active");
+    //         btnAjoutValide.disabled = true;
+    //     }
+    // }
+    // document.querySelectorAll("input").addEventListener("input", verifierChamps)
 
     btnAjoutValide.onclick = () => ajoutProjet();
     
@@ -245,24 +271,20 @@ export function modale (){
     
     isModalCreated = true;
 
-    //Fermeture de la modale
-    closeBtn.onclick = function (){
-            modal.style.display           = "none";
-            backGroundModal.style.display = "none";
-
-            let modalAjout = document.querySelector(".ajoutPhoto");
-            if (modalAjout) {
-                modalAjout.style.display = "none";
-            }
+//Fermeture de la modale
+function fermetureModale(element){
+    if (element){
+        element.style.display = "none"
     }
-    backGroundModal.onclick = function (event){
-        if (event.target === backGroundModal){
-            modal.style.display           = "none";
-            backGroundModal.style.display = "none";
-        }
-        let modalAjout = document.querySelector(".ajoutPhoto");
-            if (modalAjout) {
-                modalAjout.style.display = "none";
-            }
-    }
+}
+closeBtn.onclick = function(){
+    fermetureModale(modal);
+    fermetureModale(backGroundModal);
+    fermetureModale(document.querySelector(".ajoutPhoto"));
+};
+backGroundModal.onclick = function(){
+    fermetureModale(modal);
+    fermetureModale(backGroundModal);
+    fermetureModale(document.querySelector(".ajoutPhoto"));
+}
 }

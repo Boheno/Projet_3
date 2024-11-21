@@ -503,8 +503,11 @@ li a{
 .div-btn .btn-connection{
 	cursor: pointer;
 	margin:20px;
+	background-color: lightgrey;
 }
-
+.div-btn .btn-connection.active{
+	background-color: #1D6154;
+}
 /* Formulaire de contact page projets */
 #contact {
 	width: 50%;
