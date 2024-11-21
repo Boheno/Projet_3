@@ -324,14 +324,14 @@ li a{
 	padding-left: 20px;
 	padding-right: 15px;
 	margin-left: 80px;
-	margin-top: 30px;
+	margin-top: 20px;
 	width: 80%;
-	height: 70%;
+	height: 65%;
 	display:flex;
 	flex-wrap: wrap;
 	box-sizing: border-box;
 	justify-content: flex-start;
-	align-items: center;
+	align-items: flex-start;
 
 }
 .div-img{
@@ -362,7 +362,7 @@ li a{
 .barre-modale{
 	opacity: 0.4;
 	width: 70%;
-	margin-top: 20px;
+	margin-top: 15px;
 }
 .modal-backGround {
 	position: fixed;
@@ -394,6 +394,9 @@ li a{
 	display: flex;
 	justify-content: flex-end;
 	
+}
+.modal .btn-connection{
+	margin-top: 20px;
 }
 .ajoutPhoto{
 	top: 10%;
@@ -503,7 +506,7 @@ li a{
 .div-btn .btn-connection{
 	cursor: pointer;
 	margin:20px;
-	background-color: lightgrey;
+	background-color: grey;
 }
 .div-btn .btn-connection.active{
 	background-color: #1D6154;

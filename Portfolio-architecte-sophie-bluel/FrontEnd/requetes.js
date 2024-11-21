@@ -12,7 +12,7 @@ export async function suppressionProjets(id) {
 
 //Methode POST d'un projet
 export async function ajoutProjet (){ 
-    let photo = document.querySelector(".new-img").value;
+    let photo = document.querySelector(".new-img").src;
     let titre = document.getElementById("form-ajout").value;
     let categoriesAjout = document.getElementById("category-select").value;
 
@@ -21,7 +21,7 @@ export async function ajoutProjet (){
         title: titre,
         category: categoriesAjout
     }
-
+console.log(donneesProjet)
     let envoieProjetForm = await fetch("http://localhost:5678/api/works", {
     method:"POST",
     headers:{

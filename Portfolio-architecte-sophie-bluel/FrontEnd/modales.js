@@ -240,20 +240,20 @@ export function modale (){
     modalAjout.appendChild(divBtn);
 
     // function verifierChamps(){
-    //     let champs = document.querySelectorAll("input");
-    //     //let champSelect = document.querySelector("select");
-    //     let champsRemplis = Array.from(champs).every((input) => input.value.trim() !=="");
-    //     //let chanmpsSelectRemplis = Array.from(champSelect).every((select) => select.value.trim() !=="");
+    // let champs = document.querySelectorAll("input, text");
+    // //     //let champSelect = document.querySelector("select");
+    // let champsRemplis = Array.from(champs).every((input) => input.value.trim() !=="");
+    // //     //let chanmpsSelectRemplis = Array.from(champSelect).every((select) => select.value.trim() !=="");
 
-    //     if (champsRemplis){
-    //         btnAjoutValide.classList.add("active");
-    //         btnAjoutValide.disabled = false;
-    //     } else {
-    //         btnAjoutValide.classList.remove("active");
-    //         btnAjoutValide.disabled = true;
-    //     }
+    // if (champsRemplis){
+    // btnAjoutValide.classList.add("active");
+    // btnAjoutValide.disabled = false;
+    // } else {
+    // btnAjoutValide.classList.remove("active");
+    // btnAjoutValide.disabled = true;
     // }
-    // document.querySelectorAll("input").addEventListener("input", verifierChamps)
+    // }
+    // document.querySelectorAll("form-ajout").addEventListener("input", verifierChamps)
 
     btnAjoutValide.onclick = () => ajoutProjet();
     
