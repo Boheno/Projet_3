@@ -1,6 +1,7 @@
 import {suppressionProjets} from "./requetes.js";
 import {ajoutProjet} from "./requetes.js";
 
+let formDataCreationWork = new FormData();
 
 // Récupération des projets
 const works = await fetch("http://localhost:5678/api/works")
@@ -153,6 +154,7 @@ export function modale (){
     iconeFenetre.classList.add("fa-regular", "fa-image");
     fenetreAjout.classList.add("fenetre-ajout");
     inputPhoto.type = "file";
+    inputPhoto.id = "inputPhoto"
     inputPhoto.style.display = "none";
     
     fenetreAjout.appendChild(iconeFenetre);
@@ -174,12 +176,16 @@ export function modale (){
                 ajoutFormulaire.style.display = "none";
                 conditionPhoto.style.display = "none";
             };
+            formDataCreationWork.append("image", file)
             reader.readAsDataURL(file);
         }
     })
 
     //Formulaire Titre et Catégorie
-    //Titre
+
+    /***************/
+    /* Input Titre */
+    /***************/
     let divForm = document.createElement("div");
     divForm.classList.add("div-form");
     let ajoutTitreProjet = document.createElement("form");
@@ -187,14 +193,27 @@ export function modale (){
     let inputProjet = document.createElement("input");
 
     labelProjet.textContent = "Titre";
-    labelProjet.setAttribute("for", "form-ajout");
+    labelProjet.setAttribute("for", "inputTitre");
     inputProjet.setAttribute("type", "text");
-    inputProjet.setAttribute("id", "form-ajout");
+    inputProjet.id = "inputTitre";
 
     ajoutTitreProjet.appendChild(labelProjet);
     ajoutTitreProjet.appendChild(inputProjet);
     divForm.appendChild(ajoutTitreProjet);
-    //Catégories
+
+    inputProjet.onchange = () => {
+        // Appel de la fonction de vérification de la saisie
+        verifierChamps();
+        if (!formDataCreationWork.has("title")) {
+            formDataCreationWork.append("title", inputProjet.value);
+        } else {
+            formDataCreationWork.set("title", inputProjet.value)
+        }
+    }
+
+    /*********************/
+    /*  Select Catégorie */
+    /*********************/
     let ajoutCategoryProjet = document.createElement("form");
     let labelCategory = document.createElement("label");
     let inputCategory = document.createElement("select");
@@ -202,24 +221,43 @@ export function modale (){
     labelCategory.textContent = "Catégorie";
     labelCategory.setAttribute("for", "category-select");
     inputCategory.setAttribute("type", "text");
-    inputCategory.setAttribute("id", "category-select");
+    inputCategory.id = "category-select";
 
     ajoutCategoryProjet.appendChild(labelCategory);
     ajoutCategoryProjet.appendChild(inputCategory);
     divForm.appendChild(ajoutCategoryProjet);
 
+    // Création d'une option vide ajoutée dans le select
     let blanckCategory = document.createElement("option");
+    // Ajout d'un texte (ici blanc)
     blanckCategory.textContent = "";
+    // On place sa valeur à 0
+    blanckCategory.value = "0";
+    // Ajout dans le formulaire
     inputCategory.appendChild(blanckCategory);
 
+    // Boucle sur les catégories de la base de données pour créer des options au select
     for (let i = 0; i < categories.length; i++) {
+
         let newCategory = document.createElement("option");
+
         newCategory.textContent = categories[i]["name"];
-        newCategory.setAttribute("data-id-categorie", categories[i]["id"]);
+        newCategory.value = categories[i]["id"];
         newCategory.classList.add("list-category");
         inputCategory.appendChild(newCategory);
 
         modalAjout.appendChild(divForm);
+    }
+
+    // Ajout d'un listener ONCHANGE sur le select
+    inputCategory.onchange = () => {
+        // Appel de la fonction de vérification de la saisie
+        verifierChamps();
+        if (!formDataCreationWork.has("category")) {
+            formDataCreationWork.append("category", inputCategory.value);
+        } else {
+            formDataCreationWork.set("category", inputCategory.value)
+        }   
     }
 
     //Barre séparation
@@ -239,29 +277,45 @@ export function modale (){
     divBtn.appendChild(btnAjoutValide);
     modalAjout.appendChild(divBtn);
 
-    // function verifierChamps(){
-    // let champs = document.querySelectorAll("input, text");
-    // //     //let champSelect = document.querySelector("select");
-    // let champsRemplis = Array.from(champs).every((input) => input.value.trim() !=="");
-    // //     //let chanmpsSelectRemplis = Array.from(champSelect).every((select) => select.value.trim() !=="");
+    /**
+     * Fonction qui permet de vérifier si tous les champs de la modale ont étés saisis
+     * Si c'est le cas, le bouton "valider" est accessible
+     */
+    function verifierChamps(){
+        // Récupération des champs input
+        let champImage          = document.querySelector("#inputPhoto")
+        let champTitre          = document.querySelector("#inputTitre")
+        let champCategorie      = document.querySelector("#category-select")
 
-    // if (champsRemplis){
-    // btnAjoutValide.classList.add("active");
-    // btnAjoutValide.disabled = false;
-    // } else {
-    // btnAjoutValide.classList.remove("active");
-    // btnAjoutValide.disabled = true;
-    // }
-    // }
-    // document.querySelectorAll("form-ajout").addEventListener("input", verifierChamps)
+        // Si les champs sont tous remplis, le bouton est actif
+        if (champImage.value !== "" && champTitre.value !== "" && champCategorie.value !== "0") {
+            btnAjoutValide.classList.add("active");
+            btnAjoutValide.disabled = false;
+        // Sinon il est désactivé
+        } else {
+            btnAjoutValide.classList.remove("active");
+            btnAjoutValide.disabled = true;
+        }
+    }
 
-    btnAjoutValide.onclick = () => ajoutProjet();
+    // Envoi de la requête FETCH au click sur le bouton "valider"
+    btnAjoutValide.onclick = () => ajoutProjet(formDataCreationWork);
     
+    // Ajout de la modale dans le DOM
     document.body.appendChild(modalAjout);
+
+    // Ajout des listeners ONCHANGE sur les inputs de la création d'un projet, ils appellent
+    // la fonction de vérification de la saisie
+    document.querySelector("#inputPhoto").onchange = () => {
+        verifierChamps();
+    }
+
     modalAjout.style.display = "block";
 }
     modalAjout.style.display = "block";
 }
+
+
 
     document.querySelector("main").appendChild(backGroundModal);
     document.body.appendChild(modal);

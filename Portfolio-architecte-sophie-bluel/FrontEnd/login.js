@@ -11,8 +11,7 @@ async function seConnecter(){
 let loginRecuperation = await fetch("http://localhost:5678/api/users/login",{ 
     method:"POST",
     headers:{"Content-type":"application/json"},
-    body: JSON.stringify(donnees)
-    
+    body: JSON.stringify(donnees) 
 })
 .then(async response =>  {
     if (response.ok) {
@@ -32,7 +31,6 @@ function btnConnecter (){
 
     btnSeConnecter.onclick = () => {
         event.preventDefault();
-        console.log("cliqué");
         seConnecter()
     };
 }

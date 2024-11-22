@@ -11,23 +11,13 @@ export async function suppressionProjets(id) {
 }
 
 //Methode POST d'un projet
-export async function ajoutProjet (){ 
-    let photo = document.querySelector(".new-img").src;
-    let titre = document.getElementById("form-ajout").value;
-    let categoriesAjout = document.getElementById("category-select").value;
-
-    let donneesProjet = {
-        image: photo,
-        title: titre,
-        category: categoriesAjout
-    }
-console.log(donneesProjet)
+export async function ajoutProjet (FormData) { 
+    console.log(FormData)
     let envoieProjetForm = await fetch("http://localhost:5678/api/works", {
     method:"POST",
     headers:{
-        "Authorization": `Bearer ${localStorage.getItem("token")}`,
-        "Content-type":"application/json"},
-    body: JSON.stringify(donneesProjet)
+        "Authorization": `Bearer ${localStorage.getItem("token")}`},
+    body: FormData
     })
 .then(response =>response.json())
 //+ apparition du projet à gérer?
