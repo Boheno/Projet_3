@@ -267,6 +267,11 @@ li a{
 .gallery img {
 	width: 100%;
 }
+.notification{
+	display:flex;
+	justify-content: center;
+	margin:10px;
+}
 /* Boutons filtre catégories */
 .boutons {
 	display: flex;
@@ -304,7 +309,7 @@ li a{
 	margin:0;
 	position: fixed;
 	width: 700px;
-	height: 600px;
+	height: 500px;
 	background-color:white;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 	display:none;
@@ -404,7 +409,7 @@ li a{
 	padding: 20px;
 	position: fixed;
 	width: 700px;
-	height: 600px;
+	height: 550px;
 	background-color:white;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 	display:none;

@@ -1,5 +1,5 @@
 import {modale} from "./modales.js";
-
+import { ajoutProjet } from "./requetes.js";
 // Récupération des projets
 const works = await fetch("http://localhost:5678/api/works")
   .then(reponse => {
@@ -16,6 +16,7 @@ const categories = await fetch("http://localhost:5678/api/categories")
 pageLogin();
 generateWorks(works);
 generateCategory(works);
+
 
 // console.log(window.localStorage.getItem("token"))
   /* Ajout d'un nouveau projet pour tester */
@@ -111,8 +112,21 @@ function generateWorks(works) {
     document.querySelectorAll(".gallery").innerHTML = worksElement;
     document.querySelector(".gallery").appendChild(worksElement);
   }) 
+  
 }
+if (ajoutProjet){ 
+afficherNotification();
+}
+async function afficherNotification(){
+  let notification = document.createElement("div");
+  notification.textContent = "Nouveau projet ajouté !";
+  notification.classList.add("notification");
+  document.querySelector("#titreProjets").appendChild(notification);
 
+  setTimeout(() => {
+      notification.remove();
+  }, 5000);
+}
 function pageLogin(){
   if (localStorage.getItem("token")){
   document.querySelectorAll("#divBoutons");

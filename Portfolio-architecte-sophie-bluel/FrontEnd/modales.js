@@ -27,8 +27,20 @@ export function resetModalContent(){
     let newElement = document.querySelectorAll(".ajoutPhoto");
     newElement.forEach(element =>{
         element.style.display = "none";
-       // element.value="";
     })
+    let inputsAjouts = document.querySelectorAll(".ajoutPhoto input, .ajoutPhoto select");
+    inputsAjouts.forEach(input => {
+        if (input.type === "file"){
+            input.value = "";
+        } else {
+            input.value = "";
+        }
+        
+    })
+    // let fileInputs = document.querySelectorAll(".ajoutPhoto input[type="file"]");
+    // fileInputs.forEach(fileInput =>{
+    //     fileInput.value = null;
+    // })
 }
 
 //Fonction création de la modale et son contenu

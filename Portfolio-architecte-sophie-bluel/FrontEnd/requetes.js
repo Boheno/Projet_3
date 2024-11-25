@@ -19,6 +19,19 @@ export async function ajoutProjet (FormData) {
         "Authorization": `Bearer ${localStorage.getItem("token")}`},
     body: FormData
     })
+//.then(event.preventDefault)
 .then(response =>response.json())
-//+ apparition du projet à gérer?
+//.then (alert("Nouveau projet ajouté !"))
 }
+//Fonction notification projet ajouté
+
+// export async function afficherNotification(){
+//     let notification = document.createElement("div");
+//     notification.textContent = "Nouveau projet ajouté !";
+//     notification.classList.add("notification");
+//     document.querySelector("#titreProjets").appendChild(notification);
+
+//     setTimeout(() => {
+//         notification.remove();
+//     }, 30000);
+// }
