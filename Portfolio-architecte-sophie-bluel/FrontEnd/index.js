@@ -1,5 +1,6 @@
 import {modale} from "./modales.js";
 import { ajoutProjet } from "./requetes.js";
+
 // Récupération des projets
 const works = await fetch("http://localhost:5678/api/works")
   .then(reponse => {
@@ -114,10 +115,10 @@ function generateWorks(works) {
   }) 
   
 }
-if (ajoutProjet){ 
-afficherNotification();
-}
-async function afficherNotification(){
+// if (ajoutProjet){ 
+// afficherNotification();
+// }
+export async function afficherNotification(){
   let notification = document.createElement("div");
   notification.textContent = "Nouveau projet ajouté !";
   notification.classList.add("notification");

@@ -213,15 +213,14 @@ export function modale (){
     ajoutTitreProjet.appendChild(inputProjet);
     divForm.appendChild(ajoutTitreProjet);
 
-    inputProjet.onchange = () => {
-        // Appel de la fonction de vérification de la saisie
+    inputProjet.addEventListener("input", function() {
         verifierChamps();
         if (!formDataCreationWork.has("title")) {
             formDataCreationWork.append("title", inputProjet.value);
         } else {
             formDataCreationWork.set("title", inputProjet.value)
         }
-    }
+    })
 
     /*********************/
     /*  Select Catégorie */
@@ -262,7 +261,7 @@ export function modale (){
     }
 
     // Ajout d'un listener ONCHANGE sur le select
-    inputCategory.onchange = () => {
+    inputCategory.addEventListener("input", function() {
         // Appel de la fonction de vérification de la saisie
         verifierChamps();
         if (!formDataCreationWork.has("category")) {
@@ -270,7 +269,7 @@ export function modale (){
         } else {
             formDataCreationWork.set("category", inputCategory.value)
         }   
-    }
+    })
 
     //Barre séparation
     let barreModaleAjout = document.createElement("hr");
@@ -311,7 +310,10 @@ export function modale (){
     }
 
     // Envoi de la requête FETCH au click sur le bouton "valider"
-    btnAjoutValide.onclick = () => ajoutProjet(formDataCreationWork);
+    btnAjoutValide.addEventListener("click", function(){ 
+        event.preventDefault();
+        ajoutProjet(formDataCreationWork);
+    } );
     
     // Ajout de la modale dans le DOM
     document.body.appendChild(modalAjout);
@@ -326,8 +328,6 @@ export function modale (){
 }
     modalAjout.style.display = "block";
 }
-
-
 
     document.querySelector("main").appendChild(backGroundModal);
     document.body.appendChild(modal);

@@ -1,4 +1,6 @@
-//Fonction de suppression de travaux, la page ne doit pas être rechargée pour voir la modif
+import { afficherNotification } from "./index.js";
+
+//Suppression d'un projet
 export async function suppressionProjets(id) {
     const token = localStorage.getItem("token");
     let response = await fetch(`http://localhost:5678/api/works/${id}`, {
@@ -10,7 +12,7 @@ export async function suppressionProjets(id) {
     })
 }
 
-//Methode POST d'un projet
+//Ajout d'un projet
 export async function ajoutProjet (FormData) { 
     console.log(FormData)
     let envoieProjetForm = await fetch("http://localhost:5678/api/works", {
@@ -19,9 +21,10 @@ export async function ajoutProjet (FormData) {
         "Authorization": `Bearer ${localStorage.getItem("token")}`},
     body: FormData
     })
-//.then(event.preventDefault)
 .then(response =>response.json())
-//.then (alert("Nouveau projet ajouté !"))
+}
+if (ajoutProjet){
+    afficherNotification();
 }
 //Fonction notification projet ajouté
 

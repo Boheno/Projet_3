@@ -309,7 +309,7 @@ li a{
 	margin:0;
 	position: fixed;
 	width: 700px;
-	height: 500px;
+	height: 80%;
 	background-color:white;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 	display:none;
@@ -409,7 +409,7 @@ li a{
 	padding: 20px;
 	position: fixed;
 	width: 700px;
-	height: 550px;
+	height: 80%;
 	background-color:white;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 	display:none;
