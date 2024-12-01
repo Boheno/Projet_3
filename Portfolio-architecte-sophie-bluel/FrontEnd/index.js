@@ -1,22 +1,16 @@
 import {modale} from "./modales.js";
-import { ajoutProjet } from "./requetes.js";
+import { recupererProjets } from "./requetes.js";
+import { recupererCategories } from "./requetes.js";
 
-// Récupération des projets
-const works = await fetch("http://localhost:5678/api/works")
-  .then(reponse => {
-    if (reponse.ok) {
-      return reponse.json();
-    } 
-  })
+let works = {};
+let categories = {};
 
-  // Récupération des catégories
-const categories = await fetch("http://localhost:5678/api/categories")
-  .then(categories => 
-    categories.json())
+works = await recupererProjets();
+categories = await recupererCategories();
 
 pageLogin();
 generateWorks(works);
-generateCategory(works);
+generateCategory(categories);
 
 
 // console.log(window.localStorage.getItem("token"))
@@ -36,7 +30,7 @@ generateCategory(works);
 // )
 
 //Fonction génération des boutons
-function generateCategory(works) {
+function generateCategory(categories) {
 
   // Création bouton "Tous"
   let btnTousElement = document.createElement ("div");
@@ -96,8 +90,9 @@ function generateCategory(works) {
 }
 
 // Fonction génération des projets 
-function generateWorks(works) {
-  works.forEach(work => {;
+export function generateWorks(works) {
+
+  works.forEach(work => {
     let worksElement  = document.createElement("figure");
     let imageWorks    = document.createElement("img");
     let captionWorks  = document.createElement("figcaption");
@@ -105,6 +100,7 @@ function generateWorks(works) {
     imageWorks.src          = work.imageUrl;
     captionWorks.innerText  = work.title;
     worksElement.setAttribute("data-categorie", work.categoryId)
+    worksElement.id = `projet-${work.id}`;
     worksElement.classList.add("projet");
 
     worksElement.appendChild(imageWorks);
@@ -115,19 +111,58 @@ function generateWorks(works) {
   }) 
   
 }
-// if (ajoutProjet){ 
-// afficherNotification();
-// }
-export async function afficherNotification(){
+
+/**
+ * Fonction qui permet de générer le projet nouvellement ajouté
+ * à la liste des projets
+ * @param  id (id du projet à récupérer)
+ */
+export async function generateWork(id) {
+    let worksElement  = document.createElement("figure");
+    let imageWorks    = document.createElement("img");
+    let captionWorks  = document.createElement("figcaption");
+
+    // Rechargement de la liste des projets pour qu'elle soit à jour
+    const works = await recupererProjets();
+
+    // On boucle à travers les projets pour trouver celui qui a été ajouté
+    // avec la requête fetch d'ajout de projet et on l'ajoute au DOM
+    works.forEach(work => {
+      if (work.id === id) {
+        imageWorks.src          = work.imageUrl;
+        captionWorks.innerText  = work.title;
+        worksElement.id = `projet-${work.id}`;
+        worksElement.setAttribute("data-categorie", work.categoryId)
+        worksElement.classList.add("projet");
+
+        worksElement.appendChild(imageWorks);
+        worksElement.appendChild(captionWorks);
+    
+        document.querySelectorAll(".gallery").innerHTML = worksElement;
+        document.querySelector(".gallery").appendChild(worksElement);
+      }
+    });
+}
+
+export async function supprimerProjetPage(id) {
+  let projetASupprimer = document.querySelector(`#projet-${id}`);
+
+  if (projetASupprimer) {
+      projetASupprimer.remove();
+  }
+}
+
+export function afficherNotification(message) {
   let notification = document.createElement("div");
-  notification.textContent = "Nouveau projet ajouté !";
+  notification.textContent = message;
   notification.classList.add("notification");
-  document.querySelector("#titreProjets").appendChild(notification);
+  document.querySelector("#titreProjets").insertAdjacentElement("afterend", notification);
 
   setTimeout(() => {
       notification.remove();
   }, 5000);
 }
+
 function pageLogin(){
   if (localStorage.getItem("token")){
   document.querySelectorAll("#divBoutons");
