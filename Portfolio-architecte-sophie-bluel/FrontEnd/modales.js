@@ -64,7 +64,7 @@ export async function modale () {
     modalContent.appendChild(closeBtn);
     modal.appendChild(modalContent);
 
-    // Contenu de la modale: autre fonction?
+    // Contenu de la modale
     //Titre modale
     let titreModal = document.createElement("h3");
     titreModal.classList.add("titre-modale");
@@ -162,7 +162,7 @@ export async function modale () {
         // Formulaire pour l'ajout d'un projet
         let formulaireAjoutProjet = document.createElement("form");
 
-        //Ajout de projet: rectangle, logo img, btn ajouter photo, <p> jpg, png: 4mo max
+        //Fenêtre ajout de projet
         let fenetreAjout = document.createElement("div");
         let iconeFenetre = document.createElement("i");
         let ajoutFormulaire = document.createElement("button");
@@ -253,11 +253,8 @@ export async function modale () {
 
         // Création d'une option vide ajoutée dans le select
         let blanckCategory = document.createElement("option");
-        // Ajout d'un texte (ici blanc)
         blanckCategory.textContent = "";
-        // On place sa valeur à 0
         blanckCategory.value = "0";
-        // Ajout dans le formulaire
         inputCategory.appendChild(blanckCategory);
 
         // Boucle sur les catégories de la base de données pour créer des options au select
@@ -273,7 +270,6 @@ export async function modale () {
             formulaireAjoutProjet.appendChild(divForm);
         }
 
-        // Ajout d'un listener ONCHANGE sur le select
         inputCategory.addEventListener("input", function() {
             // Appel de la fonction de vérification de la saisie
             verifierChamps();
@@ -304,20 +300,17 @@ export async function modale () {
         modalAjout.appendChild(formulaireAjoutProjet);
 
         /**
-         * Fonction qui permet de vérifier si tous les champs de la modale ont étés saisis
-         * Si c'est le cas, le bouton "valider" est accessible
-         */
+         * Fonction vérification champs remplis
+         **/
         function verifierChamps(){
-            // Récupération des champs input
+           
             let champImage          = document.querySelector("#inputPhoto")
             let champTitre          = document.querySelector("#inputTitre")
             let champCategorie      = document.querySelector("#category-select")
 
-            // Si les champs sont tous remplis, le bouton est actif
             if (champImage.value !== "" && champTitre.value !== "" && champCategorie.value !== "0") {
                 btnAjoutValide.classList.add("active");
                 btnAjoutValide.disabled = false;
-            // Sinon il est désactivé
             } else {
                 btnAjoutValide.classList.remove("active");
                 btnAjoutValide.disabled = true;
@@ -340,11 +333,8 @@ export async function modale () {
             event.preventDefault();
         })
         
-        // Ajout de la modale dans le DOM
         document.body.appendChild(modalAjout);
 
-        // Ajout des listeners ONCHANGE sur les inputs de la création d'un projet, ils appellent
-        // la fonction de vérification de la saisie
         document.querySelector("#inputPhoto").onchange = () => {
             verifierChamps();
         }
@@ -369,7 +359,6 @@ export async function modale () {
             isModalCreated = false;
         }
     }
-
     closeBtn.onclick = function(){
         fermetureModale(modal);
         fermetureModale(backGroundModal);

@@ -25,7 +25,7 @@ let loginRecuperation = await fetch("http://localhost:5678/api/users/login",{
 })
 }
 
-//Fonction de listenner du bouton se connecter, importer via html le bouton, submit avec event.preventDefault()
+//Fonction de listenner du bouton se connecter
 function btnConnecter (){
     let btnSeConnecter = document.querySelector(".btn-connection");
 

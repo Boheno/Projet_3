@@ -12,23 +12,6 @@ pageLogin();
 generateWorks(works);
 generateCategory(categories);
 
-
-// console.log(window.localStorage.getItem("token"))
-  /* Ajout d'un nouveau projet pour tester */
-//   works.push(
-//       {
-//     "id": 12,
-//     "title": "Test de catégorie",
-//     "imageUrl": "",
-//     "categoryId": 4,
-//     "userId": 1,
-//     "category": {
-//       "id": 4,
-//       "name": "Test nouvelle catégorie"
-//     }
-//   }
-// )
-
 //Fonction génération des boutons
 function generateCategory(categories) {
 
@@ -46,7 +29,7 @@ function generateCategory(categories) {
     let figures = document.querySelectorAll(".projet");
     let afficherFigures = Array.from(figures);
     afficherFigures.forEach (figure => figure.style.display = "block");
-    activeBtn(btnTous); //Appel fonction d'activation du bouton 
+    activeBtn(btnTous);
   }
   
 // Création des autres boutons
@@ -62,8 +45,6 @@ function generateCategory(categories) {
     categoryButton.type = "button";
     categoryButton.setAttribute("class", "btnStyle");
 
-    // Listener
-    // => Récupération de tous les élements HTML qui contiennent les projets (<figure>) dans une variable
     let figures = document.querySelectorAll(".projet");
     
     // Si l'attribut de la figure ne correspond pas à l'attribut du bouton, alors on cache le projet
@@ -74,7 +55,7 @@ function generateCategory(categories) {
         figuresAAfficher.forEach(figure => figure.style.display = "block");
         categoryButton.classList.add("active");
       
-        activeBtn(categoryButton);//Appel fonction d'activation du bouton 
+        activeBtn(categoryButton);
       }
 
   //Integration HTML
@@ -114,8 +95,7 @@ export function generateWorks(works) {
 
 /**
  * Fonction qui permet de générer le projet nouvellement ajouté
- * à la liste des projets
- * @param  id (id du projet à récupérer)
+@param  id
  */
 export async function generateWork(id) {
     let worksElement  = document.createElement("figure");
@@ -125,8 +105,6 @@ export async function generateWork(id) {
     // Rechargement de la liste des projets pour qu'elle soit à jour
     const works = await recupererProjets();
 
-    // On boucle à travers les projets pour trouver celui qui a été ajouté
-    // avec la requête fetch d'ajout de projet et on l'ajoute au DOM
     works.forEach(work => {
       if (work.id === id) {
         imageWorks.src          = work.imageUrl;

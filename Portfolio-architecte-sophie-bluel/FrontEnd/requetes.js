@@ -3,7 +3,7 @@ export const recupererProjets = async () => {
     let response = await fetch("http://localhost:5678/api/works", {
         method: "GET",
         headers: {
-            "Content-Type": "application/json" // Facultatif, utile si on attend un JSON en retour
+            "Content-Type": "application/json"
         }
     });
     if (response.ok) {
@@ -56,17 +56,3 @@ export async function ajoutProjet (FormData) {
         console.log("Une erreur est survenue lors de l'ajout de votre projet.")
     }
 }
-
-
-//Fonction notification projet ajouté
-
-// export async function afficherNotification(){
-//     let notification = document.createElement("div");
-//     notification.textContent = "Nouveau projet ajouté !";
-//     notification.classList.add("notification");
-//     document.querySelector("#titreProjets").appendChild(notification);
-
-//     setTimeout(() => {
-//         notification.remove();
-//     }, 30000);
-// }
